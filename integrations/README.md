@@ -70,6 +70,8 @@ them as per-agent files. They are registered separately so the stack has one own
   `freellmapi`, and protocol references for the Maestro ledger.
 - **[Paperclip](paperclip/README.md)** — self-hosted interface base: goals, budgets with a
   hard stop and an audit trail. Maestro stays the brain and the ledger stays unique.
+- **[OpenMausBot](openmausbot/README.md)** — chat-first alternative that consumes the
+  existing `skill-md` output; no new persona and no automatic OpenCode coverage.
 
 ## Quick Install
 
