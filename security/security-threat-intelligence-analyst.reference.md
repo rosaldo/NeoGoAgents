@@ -275,7 +275,7 @@ falsepositives:
 
 ### IOC Enrichment & Correlation Script
 ```python
-#!/usr/bin/env python3
+#!/usr/bin/env -S uvx python
 """
 IOC enrichment pipeline.
 Takes raw indicators and enriches with context from multiple sources.

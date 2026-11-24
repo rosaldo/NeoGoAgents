@@ -53,7 +53,7 @@ Keep one tracker with the role, score, date, current stage, next action and the 
 - Respect public sources and rate limits. No paywall bypass, no private-session scraping, no ambiguous "automated apply" shortcut.
 - One tracker is the source of truth. Do not keep a second private list of decisions.
 - Say no to a weak fit. A short honest queue is the deliverable, not a full one.
-- Any Python helper goes through `uvx`: `uvx <tool>`, `uvx python -m …` or `uvx --with <package> python -c "…"`. No `pip`, `uv run`, `uv add`, `uv sync`, `uv tool install` or bare interpreter.
+- Any Python helper goes through `uvx`: `uvx <tool>`, `uvx python -m …` or `uvx --with <package> python -c "…"`. Never `pip`, `uv run`, `uv add`, `uv sync`, `uv tool install` or a bare interpreter.
 
 ## Deliverables
 

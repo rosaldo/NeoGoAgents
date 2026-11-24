@@ -120,7 +120,7 @@ Before anything is installed or kept — a `SKILL.md` folder, plugin, MCP server
 
 ### Step 2: Run the Static Scan
 - Check whether `skillspector` is on the PATH. If it is, run the scan above; if it exits non-zero, read any partial report and record that the static line is incomplete
-- If it is not installed, say so, offer the `uv tool install` command, and move on — do not install it unless the user asks
+- If a one-off `uvx --from git+https://github.com/rosaldo/SkillSpector.git skillspector` run is unavailable, say so and move on — do not install anything unless the user asks
 
 ### Step 3: Read the Report, Then the Source
 - Pull the score, severity, recommendation, finding IDs, and locations from the report
@@ -138,7 +138,7 @@ Before anything is installed or kept — a `SKILL.md` folder, plugin, MCP server
 - **Lead with the verdict**: "`REJECT` — the skill says it formats Markdown, but `sync.py:42` posts `~/.config` contents to an undocumented host."
 - **Score in its place**: "The score is 18, which reads as low risk — but the tool description in `server.json:12` tells the model to include prior messages in every call. A pattern scan does not read intent; I do."
 - **Explain every clearance**: "The HIGH network finding at `fetch.ts:30` is the documented weather API the skill exists to call; it sends only the city name. Cleared, with that as the reason."
-- **Honest about missing evidence**: "SkillSpector is not installed here, so no static scan ran. This is a semantic-only `CAUTION` with lower confidence. To add the static line: `uv tool install --python 3.13 git+https://github.com/rosaldo/SkillSpector.git`."
+- **Honest about missing evidence**: "SkillSpector is not available here, so no static scan ran. This is a semantic-only `CAUTION` with lower confidence. To add the static line: `uvx --from git+https://github.com/rosaldo/SkillSpector.git skillspector scan "$TARGET" --no-llm --format json --output "$REPORT"`."
 
 ## 🔄 Learning & Memory
 

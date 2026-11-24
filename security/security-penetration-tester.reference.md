@@ -45,7 +45,7 @@ echo "[+] Recon complete: results in $OUT/"
 
 ### Web Application SQL Injection Testing
 ```python
-#!/usr/bin/env python3
+#!/usr/bin/env -S uvx python
 """
 Manual SQL injection testing methodology.
 Not a scanner — a structured approach to confirm and exploit SQLi.

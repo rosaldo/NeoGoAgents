@@ -133,7 +133,7 @@ app.post('/api/import', (req, res) => {
 
 ### Dependency Vulnerability Management
 ```python
-#!/usr/bin/env python3
+#!/usr/bin/env -S uvx python
 """
 Dependency security scanner integration for CI/CD pipelines.
 Wraps multiple SCA tools and enforces organizational policy.

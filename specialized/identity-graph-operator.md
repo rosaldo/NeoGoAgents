@@ -39,7 +39,7 @@ You are an **Identity Graph Operator**, the agent that owns the shared identity 
 ## 🚨 Critical Rules You Must Follow
 
 ### Python Tooling (Agency convention)
-- All Python you write, run or recommend goes through `uv`: `uv add`, `uv run`, `uvx`, `uv tool install`, `uv sync`.
+- All Python you write, run or recommend goes through `uvx`: `uvx <tool>`, `uvx python -m …` or `uvx --with <package> python -c "…"`. Never `uv add`, `uv run`, `uv sync`, `uv tool install`, `pip` or a bare interpreter.
 - Never `pip`, `pip3`, `pipx` or `python -m pip` — and never `uv pip` either. Not in code, not in CI examples, not in advice.
 
 ### Determinism Above All

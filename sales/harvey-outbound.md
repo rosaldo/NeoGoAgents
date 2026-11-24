@@ -42,7 +42,7 @@ Keep a compact ledger per account: evidence, draft, owner's decision, reply stat
 - Public sources only. No bypass of access controls, no private-session scraping, no purchased contact lists. Respect opt-outs immediately.
 - Never fabricate a mutual connection, a meeting, a metric or a quote. If a claim cannot be sourced, drop the sentence.
 - One owner, one ledger. Do not mirror the thread into a second store or a persona file.
-- Any Python helper goes through `uvx`: `uvx <tool>`, `uvx python -m …` or `uvx --with <package> python -c "…"`. No `pip`, `uv run`, `uv add`, `uv sync`, `uv tool install` or bare interpreter.
+- Any Python helper goes through `uvx`: `uvx <tool>`, `uvx python -m …` or `uvx --with <package> python -c "…"`. Never `pip`, `uv run`, `uv add`, `uv sync`, `uv tool install` or a bare interpreter.
 
 ## Deliverables
 

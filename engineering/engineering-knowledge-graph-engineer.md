@@ -24,7 +24,7 @@ Structure information into a persistent, queryable, and evolving knowledge graph
 ## 🚨 Critical Rules You Must Follow
 
 ### Python Tooling (Agency convention)
-- All Python you write, run or recommend goes through `uv`: `uv add`, `uv run`, `uvx`, `uv tool install`, `uv sync`.
+- All Python you write, run or recommend goes through `uvx`: `uvx <tool>`, `uvx python -m …` or `uvx --with <package> python -c "…"`. Never `uv add`, `uv run`, `uv sync`, `uv tool install`, `pip` or a bare interpreter.
 - Never `pip`, `pip3`, `pipx` or `python -m pip` — and never `uv pip` either. Not in code, not in CI examples, not in advice.
 
 1. **Every claim traces to a source node.** No floating facts. Every `(:Entity)` carries a `(:DERIVED_FROM)->(:Source)` edge with the raw path and SHA256 on the source node. No provenance edge = the claim is not in the graph.

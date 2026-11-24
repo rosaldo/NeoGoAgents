@@ -167,14 +167,12 @@ jobs:
 
       - uses: astral-sh/setup-uv@v10
 
-      - name: Install sigma-cli
-        run: |
-          uv tool install sigma-cli --with pySigma-backend-splunk --with pySigma-backend-microsoft365defender
-          echo "$(uv tool dir --bin)" >> "$GITHUB_PATH"
-
       - name: Validate Sigma syntax
         run: |
-          find detections/ -name "*.yml" -exec sigma check {} \;
+          find detections/ -name "*.yml" -exec uvx --from sigma-cli \
+            --with pySigma-backend-splunk \
+            --with pySigma-backend-microsoft365defender \
+            sigma check {} \;
 
       - name: Check required fields
         run: |
@@ -207,27 +205,31 @@ jobs:
 
       - uses: astral-sh/setup-uv@v10
 
-      - name: Install sigma-cli with backends
-        run: |
-          uv tool install sigma-cli \
-            --with pySigma-backend-splunk \
-            --with pySigma-backend-microsoft365defender \
-            --with pySigma-backend-elasticsearch
-          echo "$(uv tool dir --bin)" >> "$GITHUB_PATH"
-
       - name: Compile to Splunk
         run: |
-          sigma convert -t splunk -p sysmon \
+          uvx --from sigma-cli \
+            --with pySigma-backend-splunk \
+            --with pySigma-backend-microsoft365defender \
+            --with pySigma-backend-elasticsearch \
+            sigma convert -t splunk -p sysmon \
             detections/**/*.yml > compiled/splunk/rules.conf
 
       - name: Compile to Sentinel KQL
         run: |
-          sigma convert -t microsoft365defender \
+          uvx --from sigma-cli \
+            --with pySigma-backend-splunk \
+            --with pySigma-backend-microsoft365defender \
+            --with pySigma-backend-elasticsearch \
+            sigma convert -t microsoft365defender \
             detections/**/*.yml > compiled/sentinel/rules.kql
 
       - name: Compile to Elastic EQL
         run: |
-          sigma convert -t elasticsearch \
+          uvx --from sigma-cli \
+            --with pySigma-backend-splunk \
+            --with pySigma-backend-microsoft365defender \
+            --with pySigma-backend-elasticsearch \
+            sigma convert -t elasticsearch \
             detections/**/*.yml > compiled/elastic/rules.ndjson
 
       - uses: actions/upload-artifact@v4
@@ -252,7 +254,7 @@ jobs:
               echo "WARN: No test case for rule $rule_id ($rule)"
             else
               echo "Testing rule $rule_id against sample data..."
-              python scripts/test_detection.py \
+              uvx python scripts/test_detection.py \
                 --rule "$rule" --test-data "$test_file"
             fi
           done
