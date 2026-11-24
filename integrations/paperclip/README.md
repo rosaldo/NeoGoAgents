@@ -2,6 +2,8 @@
 
 Paperclip is the **interface**, not the brain. It orchestrates agent work with goals, budgets, approvals and an audit trail. Maestro remains the single orchestration protocol in this repository and the ledger remains the single memory of record. This document registers the integration contract; it does not install an app or add a `tools.json` id (Paperclip is a server/UI, not a per-agent renderer).
 
+**Decision record (owner, 24/11/2026 — Task 23):** evaluate and document Paperclip as a self-hosted interface base; **no** API/MCP adapter id in `tools.json`, because Paperclip is a server/UI rather than a per-agent renderer. Product priority P1 does not move the task's place in the plan. Source: `project-tasks/forks-index_consolidacao-agency-agents-tasklist.md` (Task 23) and `project-docs/forks-index_context-baseline.md`.
+
 ## Why it was chosen
 
 From the canonical inventory: `paperclip` is `ADOTAR` / `INTEGRACAO`, priority P1 — orchestrates Claude, Codex, Cursor, OpenCode and Gemini with goals, budgets and governance; best interface base for the active OpenCode runtime. The upstream project is MIT-licensed (`paperclipai/paperclip`).

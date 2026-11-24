@@ -646,7 +646,9 @@ See the **[Nexus Spatial Discovery Exercise](examples/nexus-spatial-discovery.md
 
 We welcome contributions! Here's how you can help:
 
-Every commit also runs `scripts/check-context.sh`: it keeps agent descriptions at 140 chars or less, the 281-description total at 28.000 chars or less, and `CATALOG.md` in sync with the frontmatter. Agent cores above 12.000 bytes are reported as WARN, not errors, until those cores are split.
+Every commit also runs `scripts/check-context.sh --strict-core` (the same flag CI uses): it keeps agent descriptions at 140 chars or less, the 283-description total at 28.000 chars or less, and `CATALOG.md` in sync with the frontmatter. Agent cores above 12.000 bytes are errors — oversized cores were split into `<agent>.reference.md`, which `convert.sh`, `install.sh` and the Hermes builder inline into every integration.
+
+Python examples and tooling go through `uvx` only (`uvx <tool>`, `uvx python -m …`, `uvx --with <pkg> python -c "…"`). No `pip`, `uv run/add/sync` or bare `python`/`python3`; `scripts/check-python-tooling.py` enforces this across agent sources, skills, scripts, integrations and CI. See `CONTRIBUTING.md`.
 
 ### Add a New Agent
 

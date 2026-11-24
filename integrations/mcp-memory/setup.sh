@@ -18,7 +18,7 @@ echo ""
 #   - rollback: revert to a previous state
 #
 # Example (replace with your chosen server):
-#   pip install <your-mcp-memory-server>
+#   uvx <your-mcp-memory-server>       # Python servers, when shipped as a CLI
 #   npm install <your-mcp-memory-server>
 
 echo "This integration requires an MCP-compatible memory server."
@@ -68,7 +68,7 @@ fi
 
 echo ""
 echo "Next steps:"
-echo "  1. Install an MCP memory server (pip install or npm install)"
+echo "  1. Install an MCP memory server (uvx for Python CLIs, npm install for Node CLIs)"
 echo "  2. Add it to your MCP client config"
 echo "  3. Add a Memory Integration section to any agent prompt"
 echo "     (see integrations/mcp-memory/README.md for the pattern)"

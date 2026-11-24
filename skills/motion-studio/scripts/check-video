@@ -1,4 +1,4 @@
-#!/usr/bin/env -S uv run --no-project --quiet --script
+#!/usr/bin/env -S uvx python
 """check-video <scene.json> [--video out.mp4] [--layout frames/layout.json] — review layer (a).
 
 Zero-token checks of the rendered video against the plan: size/fps/duration

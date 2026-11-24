@@ -206,9 +206,9 @@ tool-specific formats.
    - How it improves over time
    - What it remembers between sessions
 
-6. **🐍 Python via `uv`**
+6. **🐍 Python via `uvx`**
    - Any Python your agent writes, runs or recommends goes through `uvx`: `uvx <tool>`, `uvx python -m …` or `uvx --with <package> python -c "…"`. Never `uv add`, `uv run`, `uv sync`, `uv tool install`, `pip` or a bare interpreter.
-   - Never `pip`, `pip3`, `pipx`, `python -m pip` — nor `uv pip`. `lint-agents.sh` rejects them
+   - Never `pip`, `pip3`, `pipx`, `python -m pip` — nor `uv pip`. `lint-agents.sh` rejects them in agent bodies; `scripts/check-python-tooling.py` also scans `.reference.md`, `skills/` (including extensionless scripts), `scripts/`, `integrations/` and CI. Both run in the local commit gate and in CI.
    - Agents with Python examples carry a `### Python Tooling (Agency convention)` block under Critical Rules
 
 ### External Services

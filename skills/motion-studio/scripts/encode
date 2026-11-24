@@ -1,4 +1,4 @@
-#!/usr/bin/env -S uv run --no-project --quiet --script
+#!/usr/bin/env -S uvx python
 """encode <scene.json> [--frames DIR] [--audio WAV] [--out-dir DIR] — the two deliverables.
 
 out.mp4: H.264 yuv420p + AAC, for publishing. preview.webm: VP9 + Opus, for

@@ -1,4 +1,4 @@
-#!/usr/bin/env -S uv run --no-project --quiet --script
+#!/usr/bin/env -S uvx python
 """contact-sheet <scene.json> [--video out.mp4] [--out contact-sheet.png] — review layer (b).
 
 One small grid image (4 cells per second) to score each scene by eye, plus the

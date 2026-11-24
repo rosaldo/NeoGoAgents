@@ -1,4 +1,4 @@
-#!/usr/bin/env -S uv run --no-project --quiet --script
+#!/usr/bin/env -S uvx python
 """validate-scene <scene.json> — check a scene against the schema and the style rules.
 
 Prints one JSON line: {"ok": true, "width", "height", "fps", "frames"} or

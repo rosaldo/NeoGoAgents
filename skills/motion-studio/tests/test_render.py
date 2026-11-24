@@ -1,6 +1,6 @@
 """render draws every frame in Chromium, the same way twice, and re-renders single scenes.
 
-Needs the Playwright Chromium and the pinned playwright wheel already in the uv
+Needs the Playwright Chromium and the pinned playwright wheel already in the uvx
 cache; runs offline (UV_OFFLINE=1) and is skipped when either is missing.
 """
 import hashlib
@@ -44,7 +44,7 @@ GRAPHICS = {
 
 
 def chromium_ready():
-    if not shutil.which("uv"):
+    if not shutil.which("uvx"):
         return False
     probe = "from playwright.sync_api import sync_playwright as s\nwith s() as p: p.chromium.launch().close()"
     r = subprocess.run(["uvx", "--with", f"playwright=={PIN}", "python", "-c", probe],

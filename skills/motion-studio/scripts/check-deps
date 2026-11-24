@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # check-deps — verify every motion-studio dependency before any other step.
 # One line per problem on stderr; exit 1 if anything is missing. A missing
-# Playwright Chromium is installed through uv and checked again.
+# Playwright Chromium is installed through uvx and checked again.
 set -uo pipefail
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -29,7 +29,7 @@ browsers_dir() {
 # upgrade to `playwright install --dry-run` parsing if revisions drift apart.
 has_chromium() { ls -d "$(browsers_dir)"/chromium* >/dev/null 2>&1; }
 
-command -v uv >/dev/null 2>&1 || problem "uv — install it from https://docs.astral.sh/uv/ ($(package_hint uv))"
+command -v uvx >/dev/null 2>&1 || problem "uvx — install it from https://docs.astral.sh/uv/ ($(package_hint uv))"
 for tool in ffmpeg ffprobe; do
   command -v "$tool" >/dev/null 2>&1 || problem "$tool — $(package_hint ffmpeg)"
 done
@@ -45,8 +45,8 @@ fi
 
 if ! has_chromium; then
   printf 'installing Playwright Chromium (playwright==%s)\n' "$PLAYWRIGHT_VERSION" >&2
-  uv run --no-project --with "playwright==$PLAYWRIGHT_VERSION" playwright install chromium >&2
-  has_chromium || { problem "Playwright Chromium — uv run --with playwright==$PLAYWRIGHT_VERSION playwright install chromium"; exit 1; }
+  uvx --from "playwright==$PLAYWRIGHT_VERSION" playwright install chromium >&2
+  has_chromium || { problem "Playwright Chromium — uvx --from playwright==$PLAYWRIGHT_VERSION playwright install chromium"; exit 1; }
 fi
 
-printf 'ok: uv, ffmpeg (libx264, libvpx-vp9, libopus), ffprobe, Playwright Chromium\n'
+printf 'ok: uvx, ffmpeg (libx264, libvpx-vp9, libopus), ffprobe, Playwright Chromium\n'

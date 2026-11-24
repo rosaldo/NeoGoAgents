@@ -2,6 +2,8 @@
 
 The **only** set registered as an installed integration stack for this fork. Everything else in `integrations/` is a harness adapter or a documented technique, not an extra runtime. Bring your own keys: no key, token, `.env` or credential file is versioned here.
 
+**Decision record (owner, 24/11/2026 — Task 21):** the canonical stack is documented here as BYOK runtime guidance, **not** added as ids in `tools.json`. `tools.json` keeps its 16 harness adapters and `check-tools.sh` stays green. Source: `project-tasks/forks-index_consolidacao-agency-agents-tasklist.md` (Task 21) and `project-docs/forks-index_context-baseline.md`.
+
 | Component | Role | Install contract | Verify |
 | --- | --- | --- | --- |
 | `codebase-memory-mcp` | Code knowledge graph: `search_graph` → `trace_path` → `get_code_snippet` → `query_graph` → `get_architecture` | MCP server registered in the client config with **`--no-hooks`** and an output cap (≤4k tokens per call by default). Prefer graph tools over grep/glob for code discovery. No repository hooks. | `search_graph(name_pattern=".*Agent.*")` returns nodes; a single call stays under the cap. |

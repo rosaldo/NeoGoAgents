@@ -1,4 +1,4 @@
-#!/usr/bin/env -S uv run --no-project --quiet --script
+#!/usr/bin/env -S uvx python
 """synth-audio <scene.json> [--out audio.wav] — a beat bed drawn in code.
 
 48 kHz mono 16-bit WAV, exactly as long as the video: a kick on every beat, a
