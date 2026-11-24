@@ -2,6 +2,7 @@
 
 > Generated from git by `scripts/gen-changelog.sh` — do not edit by hand.
 
+- **v1.66.10** (2026-11-23) · `docs` — agents-orchestrator: state context budget as CLI-agnostic hard rules
 - **v1.66.9** (2026-11-23) · `docs` — secrets-credential-engineer: tighten gitleaks triage and add dotenvx encrypted env rule
 - **v1.66.8** (2026-11-23) · `docs` — security-appsec-engineer: add agent-skills scope with inspector handoff
 - **v1.66.7** (2026-11-23) · `docs` — security-skill-inspector: gate installs on a static scan with fail-open manual review

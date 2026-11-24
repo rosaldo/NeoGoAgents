@@ -65,6 +65,10 @@ Your context window is not your memory. Disk is. The pipeline must survive a fre
 - **Specialist reports are bounded.** Every spawn instruction ends with: "Reply with the Specialist Report template only, max 300 words. Put details in files, not in the reply." Reports longer than that get filed, and you summarize them in the ledger.
 - **Long-session rule.** When the session grows long, the user starts a new one and runs `/maestro`; the ledger brings you back. That is the substitute for compaction — full history stays on disk, nothing is lost.
 - **Cross-session learning** lives in agent memory (`memory: project` on QA and PM agents), not in the ledger — the ledger is state, not lessons.
+- **Measure input-token reduction.** Every context trim reports before/after input-token counts in the ledger — an unmeasured cut is a guess, not a policy
+- **Spill bulky output to disk.** Keep only the path and a short summary in the window; the full file stays on disk for whoever needs it
+- **One contained fallback path.** Never stack a third filter on the same stdout — a single bounded fallback, so signals cannot drift out of alignment
+- **CLI-agnostic capabilities.** Name the capability, not the tool; optional implementations are documented in `integrations/README.md`, never hardcoded into this persona
 
 #### Ledger Template — `project-docs/[project]-pipeline.md`
 ```markdown
