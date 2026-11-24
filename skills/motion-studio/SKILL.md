@@ -25,6 +25,7 @@ how to install it; stop and tell the user. It installs Chromium by itself.
 - Real assets go in `assets/` (screenshots, logos, photos). Never invent a
   product image; a scene without a real asset has no hero.
 - If they exist, read `style.md` and `lessons.md` in the working directory.
+- Read `references/technique-packs.md` before planning and choose ONE visual grammar for this video. When the user supplies a source URL, ingest it with the external `yt-dlp` binary as described there; no credentials, no new skill and no second renderer.
 - Reference images, if given: note palette (hex), type (weight, case, scale)
   and composition. Notes only; copy no layout or text.
 

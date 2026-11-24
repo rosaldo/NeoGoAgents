@@ -47,7 +47,7 @@ def chromium_ready():
     if not shutil.which("uv"):
         return False
     probe = "from playwright.sync_api import sync_playwright as s\nwith s() as p: p.chromium.launch().close()"
-    r = subprocess.run(["uv", "run", "--no-project", "--quiet", "--with", f"playwright=={PIN}", "python", "-c", probe],
+    r = subprocess.run(["uvx", "--with", f"playwright=={PIN}", "python", "-c", probe],
                        env=ENV, capture_output=True)
     return r.returncode == 0
 
