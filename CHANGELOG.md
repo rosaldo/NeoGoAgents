@@ -2,6 +2,7 @@
 
 > Generated from git by `scripts/gen-changelog.sh` — do not edit by hand.
 
+- **v1.66.12** (2026-11-24) · `docs` — quant-trader: frame ccxt as venue adapter behind broker-agnostic contract
 - **v1.66.11** (2026-11-24) · `docs` — quant-trader: state public/private repository boundary for strategy skills
 - **v1.66.10** (2026-11-23) · `docs` — agents-orchestrator: state context budget as CLI-agnostic hard rules
 - **v1.66.9** (2026-11-23) · `docs` — secrets-credential-engineer: tighten gitleaks triage and add dotenvx encrypted env rule
