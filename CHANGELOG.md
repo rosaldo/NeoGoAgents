@@ -2,6 +2,7 @@
 
 > Generated from git by `scripts/gen-changelog.sh` — do not edit by hand.
 
+- **v2.0.1** (2026-11-24) · `fix` — portable maestro skill loader
 - **v2.0.0** (2026-11-24) · `major` — make the orchestrator persona harness-neutral
 - **v1.68.1** (2026-11-24) · `build` — wire context guard into commit gate and CI
 - **v1.68.0** (2026-11-24) · `feat` — add context budget guard for agents and catalog
