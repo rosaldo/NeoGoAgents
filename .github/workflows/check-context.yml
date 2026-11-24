@@ -1,0 +1,21 @@
+name: Check Prompt Context Budget
+
+# Runs on every PR (no path filter) and on the branches that carry this fork.
+# --strict-core is deliberately NOT used here: 167 agent cores are above
+# 12.000 bytes today, and they only become blocking when those cores are split.
+on:
+  pull_request:
+  push:
+    branches: [main, rosaldo, V2]
+
+jobs:
+  check-context:
+    name: descriptions <= 140, catalog in sync
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check context budget
+        run: |
+          chmod +x scripts/check-context.sh
+          ./scripts/check-context.sh

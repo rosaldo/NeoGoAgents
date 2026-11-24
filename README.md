@@ -646,6 +646,8 @@ See the **[Nexus Spatial Discovery Exercise](examples/nexus-spatial-discovery.md
 
 We welcome contributions! Here's how you can help:
 
+Every commit also runs `scripts/check-context.sh`: it keeps agent descriptions at 140 chars or less, the 281-description total at 28.000 chars or less, and `CATALOG.md` in sync with the frontmatter. Agent cores above 12.000 bytes are reported as WARN, not errors, until those cores are split.
+
 ### Add a New Agent
 
 1. Fork the repository

@@ -54,6 +54,7 @@ gate() {
 
   run_check lint-agents.sh
   run_check check-divisions.sh
+  run_check check-context.sh
   run_check test-install.sh
   run_check test-versioning.sh
   run_check test-push.sh
