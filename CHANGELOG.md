@@ -2,6 +2,7 @@
 
 > Generated from git by `scripts/gen-changelog.sh` — do not edit by hand.
 
+- **v1.66.25** (2026-11-24) · `docs` — sales: shorten agent descriptions
 - **v1.66.24** (2026-11-24) · `docs` — research: shorten agent descriptions
 - **v1.66.23** (2026-11-24) · `docs` — project-management: shorten agent descriptions
 - **v1.66.22** (2026-11-24) · `docs` — product: shorten agent descriptions
