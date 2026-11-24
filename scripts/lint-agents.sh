@@ -65,6 +65,7 @@ lint_file() {
     errors=$((errors + 1))
     return
   fi
+  [[ "$file" == *.reference.md ]] && return 0
 
   # 0. Reject CRLF line endings (repo standard is LF — see .gitattributes).
   # A trailing \r otherwise makes the frontmatter check below fail with a
@@ -188,6 +189,8 @@ else
   for dir in "${AGENT_DIRS[@]}"; do
     if [[ -d "$dir" ]]; then
       while IFS= read -r f; do
+        # Split reference files are inlined by convert.sh, not standalone agents.
+        [[ "$f" == *.reference.md ]] && continue
         files+=("$f")
       done < <(find "$dir" -name "*.md" -type f | sort)
     fi

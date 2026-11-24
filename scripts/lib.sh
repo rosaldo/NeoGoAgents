@@ -41,8 +41,15 @@ get_field() {
 }
 
 # get_body <file> — file contents with the leading frontmatter block stripped.
+# A sibling `<agent>.reference.md` (no frontmatter) is appended verbatim so the
+# split core stays small without losing content in any converted integration.
 get_body() {
   awk 'BEGIN{fm=0} /^---$/{fm++; next} fm>=2{print}' "$1"
+  local reference="${1%.md}.reference.md"
+  if [[ -f "$reference" ]]; then
+    printf '\n'
+    cat "$reference"
+  fi
 }
 
 # slugify <string> — "Frontend Developer" -> "frontend-developer"

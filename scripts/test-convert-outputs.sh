@@ -297,7 +297,7 @@ for tool in TOOLS:
 # block in a source must land intact in exactly one of the two files.
 SPLIT_FENCE = re.compile(r"^(`{3,}|~{3,})")
 
-def body_lines(text):
+def body_lines(text, reference=""):
     """Mirror lib.sh's get_body, including `$(...)`'s trailing-newline strip."""
     out, fm = [], 0
     for line in text.split("\n"):
@@ -306,6 +306,9 @@ def body_lines(text):
             continue
         if fm >= 2:
             out.append(line)
+    if reference:
+        out.append("")
+        out.extend(reference.split("\n"))
     while out and out[-1] == "":
         out.pop()
     return out
@@ -336,7 +339,10 @@ for slug, (_d, _n, path) in sorted(src.items()):
     afile = os.path.join(OUT, "openclaw", slug, "AGENTS.md")
     if not (os.path.isfile(sfile) and os.path.isfile(afile)):
         continue
-    body = body_lines(open(os.path.join(R, path), encoding="utf-8").read())
+    source_path = os.path.join(R, path)
+    reference_path = source_path[:-3] + ".reference.md"
+    reference = open(reference_path, encoding="utf-8").read() if os.path.isfile(reference_path) else ""
+    body = body_lines(open(source_path, encoding="utf-8").read(), reference)
     bl = fence_blocks(body)
     if not bl:
         continue

@@ -1,8 +1,8 @@
 name: Check Prompt Context Budget
 
 # Runs on every PR (no path filter) and on the branches that carry this fork.
-# --strict-core is deliberately NOT used here: 167 agent cores are above
-# 12.000 bytes today, and they only become blocking when those cores are split.
+# --strict-core is enabled since Task 17 split the oversized cores into
+# <agent>.reference.md files, which convert.sh inlines into every integration.
 on:
   pull_request:
   push:
@@ -18,4 +18,4 @@ jobs:
       - name: Check context budget
         run: |
           chmod +x scripts/check-context.sh
-          ./scripts/check-context.sh
+          ./scripts/check-context.sh --strict-core

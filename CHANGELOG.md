@@ -2,6 +2,7 @@
 
 > Generated from git by `scripts/gen-changelog.sh` — do not edit by hand.
 
+- **v2.1.0** (2026-11-24) · `refactor` — split oversized cores into reference files
 - **v2.0.3** (2026-11-24) · `fix` — use installed maestro agent name in OpenCode
 - **v2.0.2** (2026-11-24) · `docs` — document harness location map for all tools
 - **v2.0.1** (2026-11-24) · `fix` — portable maestro skill loader

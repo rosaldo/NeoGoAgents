@@ -57,6 +57,8 @@ trap 'rm -rf "$tmp"' EXIT
 while IFS= read -r f; do
   base="${f#./}"; base="${base%%/*}"
   [[ "$f" == *.md ]] || continue
+  # Split reference files carry no frontmatter and are inlined by convert.sh.
+  [[ "$f" == *.reference.md ]] && continue
   is_division "$base" || continue
   is_excluded "$base" && continue
   agents=$((agents + 1))

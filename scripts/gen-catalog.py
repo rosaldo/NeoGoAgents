@@ -32,6 +32,8 @@ for division in DIVISIONS:
     for f in sorted((ROOT / division).rglob('*.md')):
         if any(p in EXCLUDE for p in f.parts):
             continue
+        if f.name.endswith('.reference.md'):
+            continue
         desc = frontmatter(f)
         if desc:
             found.append((f.stem, desc))
