@@ -2,6 +2,7 @@
 
 > Generated from git by `scripts/gen-changelog.sh` — do not edit by hand.
 
+- **v2.5.2** (2026-11-24) · `docs` — document paperclip as the self-hosted interface base
 - **v2.5.1** (2026-11-24) · `docs` — document techniques and fallbacks without installing them
 - **v2.5.0** (2026-11-24) · `feat` — document the canonical BYOK runtime stack
 - **v2.4.0** (2026-11-24) · `feat` — add technique-only blender and gamedev router skills

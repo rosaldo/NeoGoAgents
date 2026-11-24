@@ -68,6 +68,8 @@ them as per-agent files. They are registered separately so the stack has one own
 - **[Techniques and fallbacks](technique-fallbacks/README.md)** — documented, not installed:
   `Graft`, `graphify`, `Understand-Anything`, `milvus`, `OmniRoute` (memory OFF),
   `freellmapi`, and protocol references for the Maestro ledger.
+- **[Paperclip](paperclip/README.md)** — self-hosted interface base: goals, budgets with a
+  hard stop and an audit trail. Maestro stays the brain and the ledger stays unique.
 
 ## Quick Install
 
