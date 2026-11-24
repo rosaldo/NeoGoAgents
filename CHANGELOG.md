@@ -2,6 +2,7 @@
 
 > Generated from git by `scripts/gen-changelog.sh` — do not edit by hand.
 
+- **v2.5.0** (2026-11-24) · `feat` — document the canonical BYOK runtime stack
 - **v2.4.0** (2026-11-24) · `feat` — add technique-only blender and gamedev router skills
 - **v2.3.0** (2026-11-24) · `feat` — fold motion technique packs into motion-studio
 - **v2.2.0** (2026-11-24) · `feat` — add curated skills for operational packs and voice

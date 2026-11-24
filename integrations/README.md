@@ -57,6 +57,18 @@ source of truth for the ids and formats below.
 Those two directories are the adapter's paths for the active TypeScript runtime,
 not paths of the archived Go fork.
 
+## Runtime services and technique docs
+
+These are **not** harness adapters and have no `tools.json` id: `aa` must not render
+them as per-agent files. They are registered separately so the stack has one owner.
+
+- **[Canonical stack](canonical-stack/README.md)** — the installed runtime services:
+  `codebase-memory-mcp` (`--no-hooks`, output cap), `litellm`, `memanto`, `zvec`,
+  `LocalAI`, `koon-mcp` and `GhidraMCP`. BYOK only; `setup.sh` is a read-only preflight.
+- **[Techniques and fallbacks](technique-fallbacks/README.md)** — documented, not installed:
+  `Graft`, `graphify`, `Understand-Anything`, `milvus`, `OmniRoute` (memory OFF),
+  `freellmapi`, and protocol references for the Maestro ledger.
+
 ## Quick Install
 
 ```bash
