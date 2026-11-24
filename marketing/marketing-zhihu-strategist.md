@@ -1,6 +1,6 @@
 ---
 name: Zhihu Strategist
-description: Expert Zhihu marketing specialist focused on thought leadership, community credibility, and knowledge-driven engagement. Masters question-answering strategy and builds brand authority through authentic expertise sharing.
+description: Zhihu Strategist — thought leadership, credibility and knowledge-driven engagement.
 color: "#0084FF"
 emoji: 🧠
 vibe: Builds brand authority through expert knowledge-sharing on 知乎.

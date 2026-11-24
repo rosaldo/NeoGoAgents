@@ -2,6 +2,7 @@
 
 > Generated from git by `scripts/gen-changelog.sh` — do not edit by hand.
 
+- **v1.66.20** (2026-11-24) · `docs` — marketing: shorten agent descriptions
 - **v1.66.19** (2026-11-24) · `docs` — healthcare: shorten agent descriptions
 - **v1.66.18** (2026-11-24) · `docs` — gis: shorten agent descriptions
 - **v1.66.17** (2026-11-24) · `docs` — game-development: shorten agent descriptions
