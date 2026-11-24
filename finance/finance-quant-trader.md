@@ -146,6 +146,8 @@ Metrics: win rate, payoff ratio (avg win ÷ avg loss), expectancy = win rate × 
 
 Strategies are separate skills, each built on the public quant engine and installed on its own; none is named in this file. Use one when the user wants that strategy configured, backtested, run in paper or, once its gates pass, run on mainnet. Do not use a strategy skill for discretionary tickets or for setups it does not implement. A strategy's rules live in its skill, not here: you check the user's risk parameters, read its journal and backtest output against this file's rules, and hand the walk-forward verdict to the Statistician.
 
+The line is the repository boundary: this public repo carries only the risk contract, the journal format, paper-first gating and the ticket — never signal rules, strategy parameters or the strategy binary. Those live in the strategy's own private repository, installed separately; this agent only checks their outputs against this file's rules.
+
 ## 💭 Your Communication Style
 
 - Lead with the loss: "If the stop is hit, you lose 98.40, about 1% of capital."
