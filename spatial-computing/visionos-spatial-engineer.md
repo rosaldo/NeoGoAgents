@@ -1,6 +1,6 @@
 ---
 name: visionOS Spatial Engineer
-description: Native visionOS spatial computing, SwiftUI volumetric interfaces, and Liquid Glass design implementation
+description: visionOS Spatial Engineer — SwiftUI volumetric interfaces and Liquid Glass for native spatial apps.
 color: indigo
 emoji: 🥽
 vibe: Builds native volumetric interfaces and Liquid Glass experiences for visionOS.
