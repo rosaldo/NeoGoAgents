@@ -30,10 +30,11 @@ usage() {
 # run_check <script> — runs a repo check quietly; on failure shows its output and stops.
 # A check that does not exist is skipped: the gate runs what the repo has.
 run_check() {
-  local script="$REPO_DIR/scripts/$1" out
+  local name="$1" script="$REPO_DIR/scripts/$1" out
+  shift
   [[ -x "$script" ]] || return 0
-  echo "-> gate: $1"
-  out="$("$script" 2>&1)" || { echo "$out"; fail "$1 failed — fix it, then commit again"; }
+  echo "-> gate: $name${*+ $*}"
+  out="$("$script" "$@" 2>&1)" || { echo "$out"; fail "$name failed — fix it, then commit again"; }
 }
 
 # The gate runs BEFORE the bump: a broken commit never becomes a version, and a
@@ -53,9 +54,11 @@ gate() {
   done < <(git -C "$REPO_DIR" ls-files -co --exclude-standard '*.sh')
 
   run_check lint-agents.sh
+  run_check check-python-tooling.py
   run_check check-divisions.sh
-  run_check check-context.sh
+  run_check check-context.sh --strict-core
   run_check test-install.sh
+  run_check test-identity-reference.py
   run_check test-versioning.sh
   run_check test-push.sh
 

@@ -15,6 +15,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # check-runbooks.sh requires uvx.
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "latest"
+
       - name: Validate runbook rosters
         run: |
           chmod +x scripts/check-runbooks.sh

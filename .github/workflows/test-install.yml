@@ -20,6 +20,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # install.sh and test-install.sh call uvx for the settings JSON checks.
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "latest"
+
       - name: Shell syntax
         run: |
           for f in scripts/*.sh; do bash -n "$f"; done

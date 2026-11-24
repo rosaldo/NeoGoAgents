@@ -14,6 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Every Python step below runs through uvx; the runner does not ship uv.
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "latest"
+
       - name: Validate tool set
         run: |
           chmod +x scripts/check-tools.sh
@@ -32,3 +37,12 @@ jobs:
 
       - name: Validate agent selection (install.sh --agent / --agents-file)
         run: bash scripts/test-agent-selection.sh
+
+      - name: Enforce uvx-only Python tooling in every source area
+        run: uvx python scripts/check-python-tooling.py
+
+      # Task 17 split 167 bodies into <agent>.reference.md. Claude Code and
+      # Copilot install one .md and Hermes stores one body string: without this
+      # check they silently lose the reference half of the agent.
+      - name: Validate full agent on all three identity paths
+        run: uvx python scripts/test-identity-reference.py

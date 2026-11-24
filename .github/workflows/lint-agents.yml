@@ -31,6 +31,11 @@ jobs:
         with:
           fetch-depth: 0
 
+      # check-agent-originality.sh requires uvx.
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "latest"
+
       - name: Get changed agent files
         id: changed
         run: |

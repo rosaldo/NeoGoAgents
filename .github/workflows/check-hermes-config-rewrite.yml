@@ -18,6 +18,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # check-hermes-config-rewrite.sh runs its Python through uvx.
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "latest"
+
       - name: Run regression cases
         run: |
           chmod +x scripts/check-hermes-config-rewrite.sh
