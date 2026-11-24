@@ -2,6 +2,7 @@
 
 > Generated from git by `scripts/gen-changelog.sh` — do not edit by hand.
 
+- **v1.66.16** (2026-11-24) · `docs` — finance: shorten agent descriptions
 - **v1.66.15** (2026-11-24) · `docs` — engineering: shorten agent descriptions
 - **v1.66.14** (2026-11-24) · `docs` — design: shorten agent descriptions
 - **v1.66.13** (2026-11-24) · `docs` — academic: shorten agent descriptions
