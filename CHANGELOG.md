@@ -2,6 +2,7 @@
 
 > Generated from git by `scripts/gen-changelog.sh` — do not edit by hand.
 
+- **v1.66.30** (2026-11-24) · `docs` — testing: shorten agent descriptions
 - **v1.66.29** (2026-11-24) · `docs` — support: shorten agent descriptions
 - **v1.66.28** (2026-11-24) · `docs` — specialized: shorten agent descriptions
 - **v1.66.27** (2026-11-24) · `docs` — spatial-computing: shorten agent descriptions

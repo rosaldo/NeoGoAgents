@@ -1,6 +1,6 @@
 ---
 name: Reality Checker
-description: Stops fantasy approvals, evidence-based certification - Default to "NEEDS WORK", requires overwhelming proof for production readiness
+description: Reality Checker — evidence-based certification, defaults to NEEDS WORK until proof is overwhelming.
 color: red
 memory: project
 emoji: 🧐
