@@ -20,6 +20,42 @@ supported agentic coding tools.
 - **[Mistral Vibe](vibe/README.md)** — `.toml` agents + prompt files generated in `vibe/`
 - **Osaurus** -- `SKILL.md` skills generated in `osaurus/`
 - **[Hermes](hermes/README.md)** -- lazy-router plugin generated in `hermes/`
+- **Zcode** — `.md` agent files in `zcode/`
+
+## Default Locations per Harness
+
+Paths are relative to the user's home (user scope) or the project root (project
+scope). `install.sh --tool <id>` writes to these locations; none of them is
+mandatory, and each harness reads its own standard location. `tools.json` is the
+source of truth for the ids and formats below.
+
+| tools.json id | Format | User scope | Project scope |
+|---|---|---|---|
+| `claude-code` | `identity` | `.claude/agents/{slug}.md` | `.claude/agents/{slug}.md` |
+| `codex` | `codex-toml` | `.codex/agents/{slug}.toml` | `.codex/agents/{slug}.toml` |
+| `gemini-cli` | `gemini-md` | `.gemini/agents/{slug}.md` | `.gemini/agents/{slug}.md` |
+| `copilot` | `identity` | `.copilot/agents/{slug}.md`, `.github/agents/{slug}.md` | `.github/agents/{slug}.md` |
+| `qwen` | `qwen-md` | `.qwen/agents/{slug}.md` | `.qwen/agents/{slug}.md` |
+| `cursor` | `cursor-mdc` | — | `.cursor/rules/{slug}.mdc` |
+| `opencode` | `opencode-md` | `.config/opencode/agents/{slug}.md` | `.opencode/agents/{slug}.md` |
+| `osaurus` | `skill-md` | `.osaurus/skills/{slug}/SKILL.md` | — |
+| `aider` | `aider-conventions` | — | `CONVENTIONS.md` |
+| `antigravity` | `skill-md` | `.gemini/config/skills/{slug}/SKILL.md` | `.agents/skills/{slug}/SKILL.md` |
+| `kimi` | `kimi-agent` | `.config/kimi/agents/{slug}/agent.yaml`, `.config/kimi/agents/{slug}/system.md` | — |
+| `openclaw` | `openclaw-workspace` | `.openclaw/agency-agents/{slug}/SOUL.md`, `.openclaw/agency-agents/{slug}/AGENTS.md`, `.openclaw/agency-agents/{slug}/IDENTITY.md` | — |
+| `windsurf` | `windsurf-rules` | — | `.windsurfrules` |
+| `hermes` | `hermes-router-plugin` | `.hermes/plugins/agency-agents-router` | — |
+| `vibe` | `vibe-toml` | `.vibe/agents/{slug}.toml`, `.vibe/prompts/{slug}.md` | `.vibe/agents/{slug}.toml`, `.vibe/prompts/{slug}.md` |
+| `zcode` | `zcode-md` | `.zcode/agents/{slug}.md` | `.zcode/agents/{slug}.md` |
+
+### OpenCode: three different roles
+
+- **Catalog `opencode`** — the archived Go fork catalogued in `forks-index`; it is not the runtime this adapter targets.
+- **`opencode-ts`** — the active TypeScript OpenCode runtime (`anomalyco/opencode`, opencode.ai).
+- **`opencode` id in `tools.json`** — this repository's adapter (`format: opencode-md`), writing to `.config/opencode/agents/{slug}.md` (user scope) and `.opencode/agents/{slug}.md` (project scope).
+
+Those two directories are the adapter's paths for the active TypeScript runtime,
+not paths of the archived Go fork.
 
 ## Quick Install
 
@@ -72,10 +108,10 @@ The Agency was originally designed for Claude Code. Agents work natively
 without conversion.
 
 ```bash
-cp -r <category>/*.md ~/.claude/agents/
-# or install everything at once:
 ./scripts/install.sh --tool claude-code
 ```
+
+Optional manual copy (not required): `cp -r <category>/*.md ~/.claude/agents/`.
 
 See [claude-code/README.md](claude-code/README.md) for details.
 
