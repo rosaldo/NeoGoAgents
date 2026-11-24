@@ -2,6 +2,7 @@
 
 > Generated from git by `scripts/gen-changelog.sh` — do not edit by hand.
 
+- **v2.7.5** (2026-11-24) · `chore` — regenerate convert-outputs manifest for Hermes reference bodies
 - **v2.7.4** (2026-11-24) · `build` — wire new checks and uv setup into local gate and CI
 - **v2.7.3** (2026-11-24) · `fix` — enforce uvx-only tooling across all source areas
 - **v2.7.2** (2026-11-24) · `fix` — inline agent references for identity installs and Hermes router
