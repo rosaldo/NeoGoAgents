@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uvx python
 """Build the Hermes lazy-router plugin for The Agency agents.
 
 The generated plugin exposes a small fixed tool surface to Hermes and keeps the

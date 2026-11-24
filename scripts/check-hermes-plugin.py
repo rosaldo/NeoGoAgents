@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uvx python
 """Validate the generated Hermes router plugin against Hermes' tool contract."""
 from __future__ import annotations
 

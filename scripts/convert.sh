@@ -649,7 +649,7 @@ run_conversions() {
 
   if [[ "$tool" == "hermes" ]]; then
     clean_tool_output "$tool"
-    python3 "$SCRIPT_DIR/build-hermes-plugin.py" --repo-root "$REPO_ROOT" --out "$OUT_DIR/hermes"
+    uvx python "$SCRIPT_DIR/build-hermes-plugin.py" --repo-root "$REPO_ROOT" --out "$OUT_DIR/hermes"
     return
   fi
 

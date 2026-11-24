@@ -20,7 +20,7 @@ jobs:
           ./scripts/check-tools.sh
 
       - name: Validate generated Hermes plugin
-        run: python3 scripts/check-hermes-plugin.py
+        run: uvx python scripts/check-hermes-plugin.py
 
       - name: Validate converted YAML frontmatter
         run: bash scripts/test-convert-frontmatter.sh

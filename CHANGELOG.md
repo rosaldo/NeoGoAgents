@@ -2,6 +2,7 @@
 
 > Generated from git by `scripts/gen-changelog.sh` — do not edit by hand.
 
+- **v2.7.0** (2026-11-24) · `refactor` — run scripts and CI Python through uvx only
 - **v2.6.2** (2026-11-24) · `docs` — switch legacy agent Python convention to uvx-only
 - **v2.6.1** (2026-11-24) · `docs` — fold modern-web review criteria into frontend developer
 - **v2.6.0** (2026-11-24) · `feat` — add career-ops and harvey-outbound agents

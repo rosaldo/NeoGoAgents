@@ -32,15 +32,15 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
-command -v python3 >/dev/null 2>&1 || {
-  echo "ERROR: python3 is required for the originality check." >&2
+command -v uvx >/dev/null 2>&1 || {
+  echo "ERROR: uvx is required for the originality check." >&2
   exit 2
 }
 
 ORIGINALITY_FAIL="${ORIGINALITY_FAIL:-40}" \
 ORIGINALITY_WARN="${ORIGINALITY_WARN:-20}" \
 REPO_ROOT="$REPO_ROOT" \
-python3 - "$@" <<'PYEOF'
+uvx python - "$@" <<'PYEOF'
 import os, re, sys, glob, json
 
 REPO_ROOT = os.environ["REPO_ROOT"]

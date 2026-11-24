@@ -796,7 +796,7 @@ install_claude_code_statusline() {
   install_file "$script" "$cfg/statusline.sh"
   chmod +x "$cfg/statusline.sh" 2>/dev/null || true
   settings="$cfg/settings.json"
-  python3 - "$settings" "$cfg/statusline.sh" <<'PY'
+  uvx python - "$settings" "$cfg/statusline.sh" <<'PY'
 import json, sys
 from pathlib import Path
 path, script = Path(sys.argv[1]), sys.argv[2]
@@ -826,7 +826,7 @@ install_claude_code_rate_gate() {
   install_file "$src/agent-rate-gate.sh" "$cfg/hooks/agent-rate-gate.sh"
   install_file "$src/agent-rate-gate.test.sh" "$cfg/hooks/agent-rate-gate.test.sh"
   chmod +x "$cfg/hooks/agent-rate-gate.sh" "$cfg/hooks/agent-rate-gate.test.sh" 2>/dev/null || true
-  python3 - "$cfg/settings.json" "$cfg/hooks/agent-rate-gate.sh" <<'PY'
+  uvx python - "$cfg/settings.json" "$cfg/hooks/agent-rate-gate.sh" <<'PY'
 import json, sys
 from pathlib import Path
 path, script = Path(sys.argv[1]), sys.argv[2]
@@ -1242,7 +1242,7 @@ ensure_hermes_plugin_enabled() {
   mkdir -p "$hermes_home"
   backup="${config}.bak.agency-agents-plugin.$$"
   [[ -f "$config" ]] && cp "$config" "$backup"
-  python3 - "$config" "$plugin" <<'PY'
+  uvx python - "$config" "$plugin" <<'PY'
 from pathlib import Path
 import sys
 import re
@@ -1432,7 +1432,7 @@ install_hermes() {
   fi
   ensure_hermes_plugin_enabled || warn "Hermes: plugin installed but config.yaml was not updated."
   local count
-  count="$(python3 - "$src/data/agents.json" <<'PY'
+  count="$(uvx python - "$src/data/agents.json" <<'PY'
 from pathlib import Path
 import json, sys
 print(len(json.loads(Path(sys.argv[1]).read_text())))

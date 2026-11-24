@@ -5,7 +5,7 @@ name: Check Hermes Config Rewrite
 #   1. Wrong indent on insert (collapses plugins.enabled onto one line as a
 #      scalar string under any config whose items use a non-default indent).
 #   2. Non-idempotent re-runs that silently duplicate the new entry.
-# Runs on every PR — small surface area, fast, no deps beyond bash + python3.
+# Runs on every PR — small surface area, fast, no deps beyond bash + uvx.
 on:
   pull_request:
   push:

@@ -16,4 +16,4 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-python3 scripts/check-hermes-config-rewrite.py
+uvx --with pyyaml python scripts/check-hermes-config-rewrite.py

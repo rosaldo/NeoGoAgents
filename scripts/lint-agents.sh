@@ -132,7 +132,7 @@ lint_file() {
   local pip_hits
   pip_hits=$(grep -nE -- '\b(pip3?|pipx) install\b|\bpython3? -m pip\b|\buv pip\b' <<<"$body" | grep -viE '\bnever\b' || true)
   if [[ -n "$pip_hits" ]]; then
-    echo "ERROR $file: pip usage found — use uv (uv add/run/uvx/uv tool install), never pip or 'uv pip':"
+    echo "ERROR $file: pip usage found — use uvx only, never pip or 'uv pip':"
     sed 's/^/        /' <<<"$pip_hits"
     errors=$((errors + 1))
   fi

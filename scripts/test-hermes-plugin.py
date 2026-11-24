@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uvx python
 """Behavior checks for the generated Hermes Agency router plugin."""
 
 from __future__ import annotations

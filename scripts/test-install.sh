@@ -167,14 +167,14 @@ assert_eq "$TOTAL_AGENTS" "$(count_md "$home/.claude/agents")" \
   "claude-code installs every agent to \$HOME/.claude/agents"
 assert_eq 0 "$(count_md "$home/.claude")" "claude-code writes nothing into the config root"
 assert_eq 1 "$([[ -x "$home/.claude/statusline.sh" ]] && echo 1 || echo 0)" "claude-code installs the Agency status line"
-assert_eq "$home/.claude/statusline.sh" "$(python3 -c 'import json,sys;print(json.load(open(sys.argv[1]))["statusLine"]["command"])' "$home/.claude/settings.json")" \
+assert_eq "$home/.claude/statusline.sh" "$(uvx python -c 'import json,sys;print(json.load(open(sys.argv[1]))["statusLine"]["command"])' "$home/.claude/settings.json")" \
   "claude-code wires the status line into settings.json"
-assert_eq "5" "$(python3 -c 'import json,sys;print(json.load(open(sys.argv[1]))["statusLine"].get("refreshInterval"))' "$home/.claude/settings.json")" \
+assert_eq "5" "$(uvx python -c 'import json,sys;print(json.load(open(sys.argv[1]))["statusLine"].get("refreshInterval"))' "$home/.claude/settings.json")" \
   "claude-code sets refreshInterval so the quota bars move while subagents run"
 home="$(sandbox statusline-keep)"
 mkdir -p "$home/.claude"; printf '{"statusLine":{"type":"command","command":"mine.sh"}}' > "$home/.claude/settings.json"
 run_install "$home" --tool claude-code
-assert_eq "mine.sh" "$(python3 -c 'import json,sys;print(json.load(open(sys.argv[1]))["statusLine"]["command"])' "$home/.claude/settings.json")" \
+assert_eq "mine.sh" "$(uvx python -c 'import json,sys;print(json.load(open(sys.argv[1]))["statusLine"]["command"])' "$home/.claude/settings.json")" \
   "claude-code leaves an existing statusLine untouched"
 home="$(sandbox rate-gate)"
 mkdir -p "$home/.claude"
@@ -183,14 +183,14 @@ run_install "$home" --tool claude-code
 run_install "$home" --tool claude-code
 assert_eq 1 "$([[ -x "$home/.claude/hooks/agent-rate-gate.sh" ]] && echo 1 || echo 0)" "claude-code installs the quota gate hook"
 assert_eq "Bash,Agent|SendMessage:$home/.claude/hooks/agent-rate-gate.sh" \
-  "$(python3 -c 'import json,sys;p=json.load(open(sys.argv[1]))["hooks"]["PreToolUse"];print(",".join(e["matcher"] for e in p)+":"+p[-1]["hooks"][0]["command"])' "$home/.claude/settings.json")" \
+  "$(uvx python -c 'import json,sys;p=json.load(open(sys.argv[1]))["hooks"]["PreToolUse"];print(",".join(e["matcher"] for e in p)+":"+p[-1]["hooks"][0]["command"])' "$home/.claude/settings.json")" \
   "claude-code registers the quota gate once and keeps existing hooks"
 home="$(sandbox rate-gate-upgrade)"
 mkdir -p "$home/.claude"
 printf '{"hooks":{"PreToolUse":[{"matcher":"Agent","hooks":[{"type":"command","command":"~/.claude/hooks/agent-rate-gate.sh","timeout":10}]}]}}' > "$home/.claude/settings.json"
 run_install "$home" --tool claude-code
 assert_eq "Agent|SendMessage:~/.claude/hooks/agent-rate-gate.sh" \
-  "$(python3 -c 'import json,sys;p=json.load(open(sys.argv[1]))["hooks"]["PreToolUse"];print(",".join(e["matcher"] for e in p)+":"+p[-1]["hooks"][0]["command"])' "$home/.claude/settings.json")" \
+  "$(uvx python -c 'import json,sys;p=json.load(open(sys.argv[1]))["hooks"]["PreToolUse"];print(",".join(e["matcher"] for e in p)+":"+p[-1]["hooks"][0]["command"])' "$home/.claude/settings.json")" \
   "claude-code upgrades an Agent-only quota gate block to Agent|SendMessage in place"
 
 home="$(sandbox path-override)"

@@ -207,7 +207,7 @@ tool-specific formats.
    - What it remembers between sessions
 
 6. **🐍 Python via `uv`**
-   - Any Python your agent writes, runs or recommends uses `uv` (`uv add`, `uv run`, `uvx`, `uv tool install`, `uv sync`)
+   - Any Python your agent writes, runs or recommends goes through `uvx`: `uvx <tool>`, `uvx python -m …` or `uvx --with <package> python -c "…"`. Never `uv add`, `uv run`, `uv sync`, `uv tool install`, `pip` or a bare interpreter.
    - Never `pip`, `pip3`, `pipx`, `python -m pip` — nor `uv pip`. `lint-agents.sh` rejects them
    - Agents with Python examples carry a `### Python Tooling (Agency convention)` block under Critical Rules
 

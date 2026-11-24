@@ -15,7 +15,7 @@
 #
 # Slugs are the agent .md filename stem (the corpus id), e.g.
 # engineering/engineering-frontend-developer.md -> "engineering-frontend-developer".
-# Uses python3 (already required by check-agent-originality.sh) for JSON; no jq,
+# Uses uvx python (already required by check-agent-originality.sh) for JSON; no jq,
 # so it runs the same on macOS and CI. Mirrors scripts/check-divisions.sh.
 #
 # Usage: ./scripts/check-runbooks.sh
@@ -23,12 +23,12 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-command -v python3 >/dev/null 2>&1 || {
-  echo "ERROR: python3 is required for the runbooks check." >&2
+command -v uvx >/dev/null 2>&1 || {
+  echo "ERROR: uvx is required for the runbooks check." >&2
   exit 2
 }
 
-python3 - <<'PYEOF'
+uvx python - <<'PYEOF'
 import json, os, subprocess, sys
 
 JSON = "strategy/runbooks.json"

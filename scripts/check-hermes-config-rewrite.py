@@ -28,7 +28,7 @@ def extract_heredoc(path: Path) -> str:
     # The heredoc body sits between <<'PY' and the next "PY" sentinel on
     # its own line. The sentinel is exactly "PY" at column 0.
     pattern = re.compile(
-        r"""python3 - "\$config" "\$plugin" <<'PY'\n(.+?)\nPY\n""",
+        r"""uvx python - "\$config" "\$plugin" <<'PY'\n(.+?)\nPY\n""",
         re.DOTALL,
     )
     match = pattern.search(text)
@@ -44,7 +44,7 @@ def run_heredoc(heredoc: str, cfg_text: str):
         p = Path(d) / "config.yaml"
         p.write_text(cfg_text)
         result = subprocess.run(
-            ["python3", "-", str(p), PLUGIN],
+            ["uvx", "--with", "pyyaml", "python", "-", str(p), PLUGIN],
             input=heredoc,
             capture_output=True,
             text=True,

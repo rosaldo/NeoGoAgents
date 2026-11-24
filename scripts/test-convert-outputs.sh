@@ -43,7 +43,7 @@
 #
 # Exit 0 only when every invariant passes AND the manifest matches (or --update,
 # or --drift=advisory).
-# Runs on bash 3.2 (macOS) and 5 (Linux); parsing is done by python3.
+# Runs on bash 3.2 (macOS) and 5 (Linux); parsing is done by uvx python.
 
 set -euo pipefail
 
@@ -64,9 +64,9 @@ for a in "$@"; do
   esac
 done
 
-command -v python3 >/dev/null 2>&1 || { echo "ERROR: python3 is required." >&2; exit 2; }
-python3 -c 'import yaml, tomllib' 2>/dev/null \
-  || { echo "ERROR: python3 needs PyYAML and tomllib (3.11+)." >&2; exit 2; }
+command -v uvx >/dev/null 2>&1 || { echo "ERROR: uvx is required." >&2; exit 2; }
+uvx --with pyyaml python -c 'import yaml, tomllib' 2>/dev/null \
+  || { echo "ERROR: uvx python needs PyYAML and tomllib (3.11+)." >&2; exit 2; }
 
 # get_field (quote-aware) and agent_slug — the same helpers convert.sh uses,
 # so the "expected" side is derived exactly the way the generator derives it.
@@ -108,7 +108,7 @@ fi
 
 # --- check: invariants + manifest (python does the parsing) -------------------
 REPO_ROOT="$REPO_ROOT" OUT="$OUT" SOURCES="$SOURCES" N="$N" MANIFEST="$MANIFEST" \
-UPDATE="$UPDATE" DIFF="$DIFF" DRIFT="$DRIFT" TOOLS="$TOOLS" python3 - <<'PY'
+UPDATE="$UPDATE" DIFF="$DIFF" DRIFT="$DRIFT" TOOLS="$TOOLS" uvx --with pyyaml python - <<'PY'
 import os, re, sys, glob, json, hashlib, yaml, tomllib
 
 R, OUT, N = os.environ["REPO_ROOT"], os.environ["OUT"], int(os.environ["N"])
