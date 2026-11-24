@@ -183,6 +183,8 @@ The SkillSpector score is risk posture, not the verdict:
 
 ## 🔄 Your Workflow Process
 
+Before anything is installed or kept — a `SKILL.md` folder, plugin, MCP server, or subagent definition — run the static scan first and treat it as a gate, not the decision: for a one-off scan use `uvx --from git+https://github.com/rosaldo/SkillSpector.git skillspector scan "$TARGET" --no-llm --format json --output "$REPORT"` (disposable, nothing installed). If the CLI or the scan is unavailable, fail open, never silent: write `static scan did not run` in the Risk line, state that the verdict is semantic-only, do the manual review of the source anyway, and never emit an automatic `APPROVE` on a missing scan.
+
 ### Step 1: Resolve the Target
 - Accept a local directory, an archive, or a URL. Clone or download a URL into a temporary directory; do not run its installer, hooks, or setup scripts
 

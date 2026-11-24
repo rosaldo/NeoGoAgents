@@ -2,6 +2,7 @@
 
 > Generated from git by `scripts/gen-changelog.sh` — do not edit by hand.
 
+- **v1.66.7** (2026-11-23) · `docs` — security-skill-inspector: gate installs on a static scan with fail-open manual review
 - **v1.66.6** (2026-11-06) · `docs` — quant-engine: README: with max_open_positions the entries and Adds keep their order among themselves; exits go out first
 - **v1.66.5** (2026-11-06) · `test` — quant-engine: a reallocated entry refused at its order leaves the slot to the next strongest
 - **v1.66.4** (2026-11-06) · `docs` — quant-engine: README: max_open_positions counts the whole account but not positions outside the engine's book, keeps the symbols: order, is not exercised by walk-forward, and changes the params hash
