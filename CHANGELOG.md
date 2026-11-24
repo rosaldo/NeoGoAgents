@@ -2,6 +2,7 @@
 
 > Generated from git by `scripts/gen-changelog.sh` — do not edit by hand.
 
+- **v1.66.31** (2026-11-24) · `chore` — refresh convert manifest and hermes count after description consolidation
 - **v1.66.30** (2026-11-24) · `docs` — testing: shorten agent descriptions
 - **v1.66.29** (2026-11-24) · `docs` — support: shorten agent descriptions
 - **v1.66.28** (2026-11-24) · `docs` — specialized: shorten agent descriptions
