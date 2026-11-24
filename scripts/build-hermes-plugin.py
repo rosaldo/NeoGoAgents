@@ -43,6 +43,13 @@ def parse_agent(path: Path, repo_root: Path) -> dict[str, str] | None:
         return None
     frontmatter = parts[1]
     body = parts[2].lstrip("\n")
+    # Task 17 split oversized cores into <agent>.reference.md. Hermes reads
+    # only this `body` string — it has no notion of a sibling file — so append
+    # the reference here, mirroring lib.sh's get_body used by every convert.sh
+    # integration. Skipping it silently truncated 167 agents in the router.
+    reference_path = path.with_suffix(".reference.md")
+    if reference_path.is_file():
+        body = f"{body}\n{reference_path.read_text(encoding='utf-8')}"
     fields: dict[str, str] = {}
     for line in frontmatter.splitlines():
         if ":" not in line or line.startswith((" ", "\t")):

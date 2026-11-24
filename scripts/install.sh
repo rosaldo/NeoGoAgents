@@ -282,6 +282,30 @@ install_file() {
   if $USE_LINK; then ln -sf "$1" "$2"; else cp "$1" "$2"; fi
 }
 
+# install_agent_md <src> <dest> — install one agent as a single self-contained
+# Markdown file. Claude Code and Copilot read only the .md they are given: they
+# do not follow a sibling <agent>.reference.md. Since Task 17 split oversized
+# cores, inlining the reference here is the only way those tools see the full
+# agent. get_body (lib.sh) is the same helper convert.sh uses, so source and
+# raw-source formats cannot drift apart.
+install_agent_md() {
+  local src="$1" dest="$2"
+  # Preserve the frontmatter verbatim (name/description/color/emoji/vibe),
+  # then append the body + reference produced by get_body. Do not regenerate
+  # the frontmatter: quoting rules and values are owned by the source file.
+  awk 'NR==1 && $0=="---"{fm=1; print; next} fm==1{print} fm==1 && $0=="---"{exit}' "$src" > "$dest.tmp"
+  printf '\n' >> "$dest.tmp"
+  get_body "$src" >> "$dest.tmp"
+  if $USE_LINK; then
+    # A symlink needs a stable target containing the combined content.
+    local cache="$dest.combined"
+    mv "$dest.tmp" "$cache"
+    ln -sf "$cache" "$dest"
+  else
+    mv "$dest.tmp" "$dest"
+  fi
+}
+
 # resolve_dest <tool> <default> — --path > $ENV_VAR > default.
 # path_collision_group <tool> — tools in the same group write identical
 # filenames into a shared --path and would overwrite each other; empty means
@@ -764,7 +788,7 @@ install_claude_code() {
     while IFS= read -r -d '' f; do
       is_agent_file "$f" || continue
       slug="$(agent_slug "$f")"; slug_allowed "$slug" || continue
-      install_file "$f" "$dest/"; incr count
+      install_agent_md "$f" "$dest/$(basename "$f")"; incr count
     done < <(find "$REPO_ROOT/$dir" -name "*.md" -type f -print0)
   done
   ok "Claude Code: $count agents -> $dest"
@@ -954,8 +978,8 @@ install_copilot() {
     while IFS= read -r -d '' f; do
       is_agent_file "$f" || continue
       slug="$(agent_slug "$f")"; slug_allowed "$slug" || continue
-      install_file "$f" "$dest_github/"
-      install_file "$f" "$dest_copilot/"
+      install_agent_md "$f" "$dest_github/$(basename "$f")"
+      install_agent_md "$f" "$dest_copilot/$(basename "$f")"
       incr count
     done < <(find "$REPO_ROOT/$dir" -name "*.md" -type f -print0)
   done

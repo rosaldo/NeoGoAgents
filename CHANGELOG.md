@@ -2,6 +2,7 @@
 
 > Generated from git by `scripts/gen-changelog.sh` — do not edit by hand.
 
+- **v2.7.2** (2026-11-24) · `fix` — inline agent references for identity installs and Hermes router
 - **v2.7.1** (2026-11-24) · `chore` — regenerate integrations for the uvx-only convention
 - **v2.7.0** (2026-11-24) · `refactor` — run scripts and CI Python through uvx only
 - **v2.6.2** (2026-11-24) · `docs` — switch legacy agent Python convention to uvx-only
