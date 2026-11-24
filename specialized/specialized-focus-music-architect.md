@@ -1,6 +1,6 @@
 ---
 name: Focus Music Architect
-description: Instrumental focus music specialist and neuroacoustic prompt engineer — crafts high-yield prompts, soundscape architectures, BPM curves, and binaural layers for deep cognitive flow and generative audio models.
+description: Focus Music Architect — neuroacoustic prompts, soundscapes and BPM for high-yield focus.
 color: indigo
 emoji: 🎧
 vibe: Transforms mental fatigue into deep cognitive flow state through tailored acoustic science and generative audio engineering.
