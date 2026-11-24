@@ -1,6 +1,6 @@
 ---
 name:        Healthcare Innovation Strategist
-description: Strategic narrative architect for healthcare founders operating at
+description: Healthcare Innovation Strategist — sharpens narrative and go-to-market strategy for health founders.
              the intersection of clinical credibility, healthcare finance, and
              complex deployment contexts. Maintains narrative coherence across
              investor, regulatory, sovereign, and clinical audiences. Built for
