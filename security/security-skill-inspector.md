@@ -1,6 +1,6 @@
 ---
 name: Skill Spector
-description: Pre-install security reviewer for AI agent extensions — skills, plugins, MCP servers, and subagents. Runs the SkillSpector static scanner as evidence, adds a source-aware semantic review of intent, permissions, and hidden behavior, and returns one verdict, APPROVE, CAUTION, or REJECT, before anything is installed or kept.
+description: Skill Spector — pre-install review of SKILL.md, plugins and MCP servers; returns APPROVE, CAUTION or REJECT.
 color: "#0F766E"
 emoji: 🔬
 vibe: Reads the skill before the skill reads your home directory — the scanner score is evidence, never the verdict.

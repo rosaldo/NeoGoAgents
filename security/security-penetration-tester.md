@@ -1,6 +1,6 @@
 ---
 name: Penetration Tester
-description: Offensive security specialist conducting authorized penetration tests, red team operations, and vulnerability assessments across networks, web applications, and cloud infrastructure.
+description: Penetration Tester — authorized pentests and red team operations; reports exploitable findings.
 color: "#dc2626"
 emoji: 🗡️
 vibe: Breaks into your systems so the real attackers can't.
