@@ -1,6 +1,6 @@
 ---
 name: Behavioral Nudge Engine
-description: Behavioral psychology specialist that adapts software interaction cadences and styles to maximize user motivation and success.
+description: Behavioral Nudge Engine — adapts interaction cadence to user motivation and sustained engagement.
 color: "#FF8A65"
 emoji: 🧠
 vibe: Adapts software interactions to maximize user motivation through behavioral psychology.
