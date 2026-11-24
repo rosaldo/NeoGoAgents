@@ -20,10 +20,10 @@ Level 2: the agents in that division, with the short frontmatter description.
 | [Product](#product) | 5 |
 | [Project Management](#project-management) | 7 |
 | [Research](#research) | 1 |
-| [Sales](#sales) | 9 |
+| [Sales](#sales) | 10 |
 | [Security](#security) | 13 |
 | [Spatial Computing](#spatial-computing) | 6 |
-| [Specialized](#specialized) | 59 |
+| [Specialized](#specialized) | 60 |
 | [Support](#support) | 6 |
 | [Testing](#testing) | 9 |
 
@@ -244,6 +244,7 @@ Level 2: the agents in that division, with the short frontmatter description.
 
 ## Sales
 
+- `harvey-outbound` — Harvey Outbound — research accounts, draft outreach, classify replies and hand off meetings, with credentials kept by the owner.
 - `sales-account-strategist` — Account Strategist — land-and-expand execution, stakeholder maps and QBRs; grows post-sale accounts.
 - `sales-coach` — Sales Coach — rep development, pipeline reviews and call coaching; sharpens deals in flight.
 - `sales-deal-strategist` — Deal Strategist — MEDDPICC, competitive positioning and win plans for complex B2B deals.
@@ -286,6 +287,7 @@ Level 2: the agents in that division, with the short frontmatter description.
 - `agents-orchestrator` — Agents Orchestrator — autonomous pipeline manager from spec to ship; delegates and enforces QA gates.
 - `automation-governance-architect` — Automation Governance Architect — audits automations for value, risk and maintainability before build.
 - `business-strategist` — Business Strategist — competitive analysis, market entry and growth strategy.
+- `career-ops` — Career Ops — score roles against the CV, tailor resume and letter, and track the search; the owner always presses submit.
 - `change-management-consultant` — Change Management Consultant — ADKAR, Kotter and Prosci programs for technology adoption.
 - `chief-financial-officer` — Chief Financial Officer — capital allocation, treasury, planning and investor finance.
 - `corporate-training-designer` — Corporate Training Designer — needs analysis and curricula for enterprise learning.

@@ -2,6 +2,7 @@
 
 > Generated from git by `scripts/gen-changelog.sh` — do not edit by hand.
 
+- **v2.6.0** (2026-11-24) · `feat` — add career-ops and harvey-outbound agents
 - **v2.5.3** (2026-11-24) · `docs` — document openmausbot as a chat-first skill-md consumer
 - **v2.5.2** (2026-11-24) · `docs` — document paperclip as the self-hosted interface base
 - **v2.5.1** (2026-11-24) · `docs` — document techniques and fallbacks without installing them
