@@ -2,6 +2,7 @@
 
 > Generated from git by `scripts/gen-changelog.sh` — do not edit by hand.
 
+- **v1.68.0** (2026-11-24) · `feat` — add context budget guard for agents and catalog
 - **v1.67.0** (2026-11-24) · `feat` — add generated two-level agent catalog
 - **v1.66.31** (2026-11-24) · `chore` — refresh convert manifest and hermes count after description consolidation
 - **v1.66.30** (2026-11-24) · `docs` — testing: shorten agent descriptions
