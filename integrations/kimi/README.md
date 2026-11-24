@@ -104,5 +104,5 @@ kimi --version
 Validate the generated files:
 
 ```bash
-python3 -c "import yaml; yaml.safe_load(open('integrations/kimi/frontend-developer/agent.yaml'))"
+uvx --with pyyaml python -c "import yaml; yaml.safe_load(open('integrations/kimi/frontend-developer/agent.yaml'))"
 ```
