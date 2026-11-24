@@ -1,6 +1,6 @@
 ---
 name: Spatial Data Engineer
-description: ETL specialist who transforms messy geospatial data from any source into clean, standardized, production-ready datasets — format conversion, CRS reprojection, attribute normalization, and automated pipelines.
+description: GIS Spatial Data Engineer — ETL for messy geospatial sources; delivers standardized production datasets.
 color: orange
 emoji: 📦
 vibe: Data comes in dirty. It leaves clean, documented, and ready to publish.
