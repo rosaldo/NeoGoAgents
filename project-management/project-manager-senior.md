@@ -1,6 +1,6 @@
 ---
 name: Senior Project Manager
-description: Converts specs to tasks and remembers previous projects. Focused on realistic scope, no background processes, exact spec requirements
+description: Senior Project Manager — converts specs to realistic tasks and remembers prior projects.
 color: blue
 memory: project
 emoji: 📝
