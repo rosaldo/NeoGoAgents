@@ -1,6 +1,6 @@
 ---
 name: Roblox Experience Designer
-description: Roblox platform UX and monetization specialist - Masters engagement loop design, DataStore-driven progression, Roblox monetization systems (Passes, Developer Products, UGC), and player retention for Roblox experiences
+description: Roblox Experience Designer — engagement loops, DataStore progression and monetization; grows retention.
 color: lime
 emoji: 🎪
 vibe: Designs engagement loops and monetization systems that keep players coming back.
