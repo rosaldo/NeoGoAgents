@@ -2,6 +2,7 @@
 
 > Generated from git by `scripts/gen-changelog.sh` — do not edit by hand.
 
+- **v2.7.7** (2026-11-24) · `build` — run convert-output drift check in local gate
 - **v2.7.6** (2026-11-24) · `fix` — close Python tooling verifier blind spots
 - **v2.7.5** (2026-11-24) · `chore` — regenerate convert-outputs manifest for Hermes reference bodies
 - **v2.7.4** (2026-11-24) · `build` — wire new checks and uv setup into local gate and CI
