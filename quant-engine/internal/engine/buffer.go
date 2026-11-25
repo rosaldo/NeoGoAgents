@@ -6,8 +6,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/rosaldo/agency-agents/quant-engine/exchange"
-	"github.com/rosaldo/agency-agents/quant-engine/market"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/exchange"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/market"
 )
 
 // CandleBuffer keeps the last candles of each symbol (and input) between

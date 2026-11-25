@@ -6,11 +6,11 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/rosaldo/agency-agents/quant-engine/exchange"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/config"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/exec"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/journal"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/risk"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/exchange"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/config"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/exec"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/journal"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/risk"
 )
 
 // Stop before liquidation, on swap markets only (spot has none):

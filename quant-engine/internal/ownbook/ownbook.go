@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/rosaldo/agency-agents/quant-engine/exchange"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/exchange"
 )
 
 // ForeignQty starts the reason of a symbol whose account position holds

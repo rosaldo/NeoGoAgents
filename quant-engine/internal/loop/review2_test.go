@@ -9,12 +9,12 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/rosaldo/agency-agents/quant-engine/exchange"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/config"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/exchange/fake"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/journal"
-	"github.com/rosaldo/agency-agents/quant-engine/market"
-	"github.com/rosaldo/agency-agents/quant-engine/strategy/example"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/exchange"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/config"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/exchange/fake"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/journal"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/market"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/strategy/example"
 )
 
 // runMode runs the loop on the crash fixture (a drawdown halt) in mode.

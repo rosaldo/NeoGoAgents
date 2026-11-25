@@ -9,8 +9,8 @@ import (
 
 	lib "github.com/rosaldo/ccxt/v5"
 
-	"github.com/rosaldo/agency-agents/quant-engine/exchange"
-	"github.com/rosaldo/agency-agents/quant-engine/market"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/exchange"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/market"
 )
 
 // Watcher is the part of a CCXT Pro client that streams candles: each call

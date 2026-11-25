@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/rosaldo/agency-agents/quant-engine/internal/journal"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/journal"
 )
 
 // The stream ended an older candle than REST's last closed one: REST's

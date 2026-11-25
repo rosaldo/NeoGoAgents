@@ -11,8 +11,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/rosaldo/agency-agents/quant-engine/internal/config"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/news"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/config"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/news"
 )
 
 const orKey = "or-canary-key-5f2a"

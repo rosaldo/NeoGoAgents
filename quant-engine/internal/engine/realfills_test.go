@@ -5,12 +5,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/rosaldo/agency-agents/quant-engine/exchange"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/config"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/exchange/fake"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/exchange/paper"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/risk"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/scripted"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/exchange"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/config"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/exchange/fake"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/exchange/paper"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/risk"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/scripted"
 )
 
 // optimisticZeroFee is a Hyperliquid swap yml whose active profile is

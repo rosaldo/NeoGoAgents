@@ -6,11 +6,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/rosaldo/agency-agents/quant-engine/exchange"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/exchange/fake"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/journal"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/ownbook"
-	"github.com/rosaldo/agency-agents/quant-engine/strategy"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/exchange"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/exchange/fake"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/journal"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/ownbook"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/strategy"
 )
 
 // accountView adds what an adapter reports beyond the fake: a symbol blocked

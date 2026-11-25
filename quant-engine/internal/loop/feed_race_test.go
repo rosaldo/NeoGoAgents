@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/rosaldo/agency-agents/quant-engine/exchange"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/exchange"
 )
 
 // schedClock is a Clock whose After(d) advances the time by d unless a

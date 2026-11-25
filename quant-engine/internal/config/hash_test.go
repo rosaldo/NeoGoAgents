@@ -4,8 +4,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/rosaldo/agency-agents/quant-engine/strategy"
-	"github.com/rosaldo/agency-agents/quant-engine/strategy/example"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/strategy"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/strategy/example"
 	"go.yaml.in/yaml/v3"
 )
 

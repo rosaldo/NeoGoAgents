@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/rosaldo/agency-agents/quant-engine/exchange"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/exchange/fake"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/exchange"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/exchange/fake"
 )
 
 // The old stop filled in part while the trail swapped it: the new

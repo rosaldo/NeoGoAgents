@@ -4,7 +4,7 @@ import (
 	"math"
 	"testing"
 
-	"github.com/rosaldo/agency-agents/quant-engine/market"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/market"
 )
 
 func closes(vs ...float64) []market.Candle {

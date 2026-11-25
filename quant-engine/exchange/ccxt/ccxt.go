@@ -22,9 +22,9 @@ import (
 
 	lib "github.com/rosaldo/ccxt/v5"
 
-	"github.com/rosaldo/agency-agents/quant-engine/exchange"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/ownbook"
-	"github.com/rosaldo/agency-agents/quant-engine/market"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/exchange"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/ownbook"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/market"
 )
 
 // Client is the part of a CCXT exchange the adapter uses. Stops go through

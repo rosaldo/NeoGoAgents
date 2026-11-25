@@ -8,7 +8,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/rosaldo/agency-agents/quant-engine/market"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/market"
 )
 
 // Env is explicit on every call: demo for paper, Real (mainnet) only for mainnet.

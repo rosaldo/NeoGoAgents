@@ -8,11 +8,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/rosaldo/agency-agents/quant-engine/exchange"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/config"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/exchange/fake"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/scripted"
-	"github.com/rosaldo/agency-agents/quant-engine/strategy"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/exchange"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/config"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/exchange/fake"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/scripted"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/strategy"
 )
 
 // scriptOf answers each Decide with the next decision, then none; onEach

@@ -8,7 +8,7 @@ import (
 
 	lib "github.com/rosaldo/ccxt/v5"
 
-	"github.com/rosaldo/agency-agents/quant-engine/exchange"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/exchange"
 )
 
 // derivStub is a swap client that reads open interest and funding rates.

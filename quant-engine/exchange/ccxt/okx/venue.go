@@ -5,7 +5,7 @@ package okx
 import (
 	lib "github.com/rosaldo/ccxt/v5"
 
-	"github.com/rosaldo/agency-agents/quant-engine/exchange/ccxt"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/exchange/ccxt"
 )
 
 var _ ccxt.APIKeyClient = (*lib.Okx)(nil) // compile time: the venue satisfies the adapter

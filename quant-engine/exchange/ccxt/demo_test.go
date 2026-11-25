@@ -7,7 +7,7 @@ import (
 
 	lib "github.com/rosaldo/ccxt/v5"
 
-	"github.com/rosaldo/agency-agents/quant-engine/exchange"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/exchange"
 )
 
 // The testnet demo trades the sandbox client and reads the signal's

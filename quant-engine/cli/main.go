@@ -25,18 +25,18 @@ import (
 	"time"
 	_ "time/tzdata" // prebuilt binaries must resolve the yml timezone without system tzdata
 
-	"github.com/rosaldo/agency-agents/quant-engine/backtest"
-	"github.com/rosaldo/agency-agents/quant-engine/exchange"
-	ccxtx "github.com/rosaldo/agency-agents/quant-engine/exchange/ccxt"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/config"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/engine"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/exchange/fake"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/exchange/paper"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/gate"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/journal"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/loop"
-	"github.com/rosaldo/agency-agents/quant-engine/market"
-	"github.com/rosaldo/agency-agents/quant-engine/strategy"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/backtest"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/exchange"
+	ccxtx "github.com/rosaldo/NeoGoAgents/quant-engine/exchange/ccxt"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/config"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/engine"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/exchange/fake"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/exchange/paper"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/gate"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/journal"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/loop"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/market"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/strategy"
 )
 
 // App is one strategy binary: one strategy on one exchange venue, chosen at

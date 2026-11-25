@@ -7,9 +7,9 @@ import (
 	"math"
 	"time"
 
-	"github.com/rosaldo/agency-agents/quant-engine/exchange"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/exec"
-	"github.com/rosaldo/agency-agents/quant-engine/strategy"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/exchange"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/exec"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/strategy"
 )
 
 // Generic trailing stop: the rule is the strategy's (strategy.Trailer);

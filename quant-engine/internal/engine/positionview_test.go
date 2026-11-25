@@ -5,11 +5,11 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/rosaldo/agency-agents/quant-engine/exchange"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/config"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/risk"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/scripted"
-	"github.com/rosaldo/agency-agents/quant-engine/strategy"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/exchange"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/config"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/risk"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/scripted"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/strategy"
 )
 
 // seen records what each Decide call was told of the position.

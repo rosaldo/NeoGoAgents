@@ -7,10 +7,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/rosaldo/agency-agents/quant-engine/internal/config"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/journal"
-	"github.com/rosaldo/agency-agents/quant-engine/strategy"
-	"github.com/rosaldo/agency-agents/quant-engine/strategy/example"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/config"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/journal"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/strategy"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/strategy/example"
 )
 
 const liveYAML = `

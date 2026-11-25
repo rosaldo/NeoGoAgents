@@ -14,9 +14,9 @@ import (
 
 	"go.yaml.in/yaml/v3"
 
-	"github.com/rosaldo/agency-agents/quant-engine/internal/news"
-	"github.com/rosaldo/agency-agents/quant-engine/market"
-	"github.com/rosaldo/agency-agents/quant-engine/strategy"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/news"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/market"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/strategy"
 )
 
 // exchangeID is "fake" or a CCXT exchange id (checked against CCXT at start).

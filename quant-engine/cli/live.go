@@ -8,8 +8,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/rosaldo/agency-agents/quant-engine/exchange"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/config"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/exchange"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/config"
 )
 
 // openTTY opens the controlling terminal itself, never stdin, so a plain tool

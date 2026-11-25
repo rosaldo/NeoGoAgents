@@ -8,7 +8,7 @@ import (
 
 	lib "github.com/rosaldo/ccxt/v5"
 
-	"github.com/rosaldo/agency-agents/quant-engine/exchange"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/exchange"
 )
 
 // levStub is the swap stub whose AAA/USDC:USDC market caps leverage at 20.

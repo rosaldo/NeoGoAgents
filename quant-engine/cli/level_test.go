@@ -10,7 +10,7 @@ import (
 
 	lib "github.com/rosaldo/ccxt/v5"
 
-	ccxtx "github.com/rosaldo/agency-agents/quant-engine/exchange/ccxt"
+	ccxtx "github.com/rosaldo/NeoGoAgents/quant-engine/exchange/ccxt"
 )
 
 // marketsOnly lists AAA as a spot market and nothing else: enough for the

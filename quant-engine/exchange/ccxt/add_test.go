@@ -5,9 +5,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/rosaldo/agency-agents/quant-engine/exchange"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/exec"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/ownbook"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/exchange"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/exec"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/ownbook"
 )
 
 // Netting, an add on the engine's long: own_qty is the sum of the tranches,

@@ -25,9 +25,9 @@ A strategy binary is one call:
 package main
 
 import (
-	"github.com/rosaldo/agency-agents/quant-engine/cli"
-	"github.com/rosaldo/agency-agents/quant-engine/exchange/ccxt/hyperliquid"
-	"github.com/rosaldo/agency-agents/quant-engine/strategy/example"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/cli"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/exchange/ccxt/hyperliquid"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/strategy/example"
 )
 
 func main() {

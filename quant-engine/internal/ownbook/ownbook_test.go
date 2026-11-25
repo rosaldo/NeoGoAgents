@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/rosaldo/agency-agents/quant-engine/exchange"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/exchange"
 )
 
 // The netting rule, one case per row.

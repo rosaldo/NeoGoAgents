@@ -14,17 +14,17 @@ import (
 	"strings"
 	"time"
 
-	"github.com/rosaldo/agency-agents/quant-engine/exchange"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/config"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/exchange/paper"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/exec"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/journal"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/news"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/news/typesafe"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/ownbook"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/risk"
-	"github.com/rosaldo/agency-agents/quant-engine/market"
-	"github.com/rosaldo/agency-agents/quant-engine/strategy"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/exchange"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/config"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/exchange/paper"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/exec"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/journal"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/news"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/news/typesafe"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/ownbook"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/risk"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/market"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/strategy"
 )
 
 type Engine struct {

@@ -10,8 +10,8 @@ import (
 
 	"go.yaml.in/yaml/v3"
 
-	"github.com/rosaldo/agency-agents/quant-engine/indicators"
-	"github.com/rosaldo/agency-agents/quant-engine/strategy"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/indicators"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/strategy"
 )
 
 // Name is refused by the mainnet gate.

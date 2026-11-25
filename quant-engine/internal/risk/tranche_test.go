@@ -5,9 +5,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/rosaldo/agency-agents/quant-engine/internal/config"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/risk"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/scripted"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/config"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/risk"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/scripted"
 )
 
 // realFillCosts are the costs sizing counts on real fills with the

@@ -8,9 +8,9 @@ import (
 
 	lib "github.com/rosaldo/ccxt/v5"
 
-	"github.com/rosaldo/agency-agents/quant-engine/exchange"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/exec"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/risk"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/exchange"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/exec"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/risk"
 )
 
 func executor(a *Adapter) *exec.Executor {

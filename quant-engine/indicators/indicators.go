@@ -6,7 +6,7 @@ package indicators
 import (
 	"math"
 
-	"github.com/rosaldo/agency-agents/quant-engine/market"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/market"
 )
 
 // Window is a fixed-size ring of the most recent candles.

@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/rosaldo/agency-agents/quant-engine/strategy/example"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/strategy/example"
 )
 
 // The README's yml example must load as written: a reader copies it.

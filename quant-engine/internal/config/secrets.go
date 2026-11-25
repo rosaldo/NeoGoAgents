@@ -5,7 +5,7 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/rosaldo/agency-agents/quant-engine/strategy"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/strategy"
 	"go.yaml.in/yaml/v3"
 )
 

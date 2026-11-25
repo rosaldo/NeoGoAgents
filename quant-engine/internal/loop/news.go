@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/rosaldo/agency-agents/quant-engine/internal/journal"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/news"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/journal"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/news"
 )
 
 // newsResult is one symbol's news check after its entry: the findings not

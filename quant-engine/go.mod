@@ -1,4 +1,4 @@
-module github.com/rosaldo/agency-agents/quant-engine
+module github.com/rosaldo/NeoGoAgents/quant-engine
 
 go 1.25.0
 

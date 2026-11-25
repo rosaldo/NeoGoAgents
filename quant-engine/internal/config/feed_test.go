@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/rosaldo/agency-agents/quant-engine/strategy/example"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/strategy/example"
 )
 
 // feed is rest by default, websocket on request, anything else refused; it

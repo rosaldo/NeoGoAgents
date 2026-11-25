@@ -19,7 +19,7 @@ import (
 	lib "github.com/rosaldo/ccxt/v5"
 	pro "github.com/rosaldo/ccxt/v5/pro"
 
-	"github.com/rosaldo/agency-agents/quant-engine/exchange/ccxt"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/exchange/ccxt"
 )
 
 var _ ccxt.Client = (*client)(nil) // compile time: the venue satisfies the adapter

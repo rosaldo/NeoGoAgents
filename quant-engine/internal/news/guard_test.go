@@ -12,9 +12,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/rosaldo/agency-agents/quant-engine/internal/config"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/news"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/news/typesafe"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/config"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/news"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/news/typesafe"
 )
 
 const testKey = "ts-test-key-0123456789abcdef"

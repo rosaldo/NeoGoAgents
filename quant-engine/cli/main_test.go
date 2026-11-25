@@ -10,12 +10,12 @@ import (
 	"testing"
 	"time"
 
-	ccxtx "github.com/rosaldo/agency-agents/quant-engine/exchange/ccxt"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/config"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/scripted"
-	"github.com/rosaldo/agency-agents/quant-engine/market"
-	"github.com/rosaldo/agency-agents/quant-engine/strategy"
-	"github.com/rosaldo/agency-agents/quant-engine/strategy/example"
+	ccxtx "github.com/rosaldo/NeoGoAgents/quant-engine/exchange/ccxt"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/config"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/scripted"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/market"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/strategy"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/strategy/example"
 	"go.yaml.in/yaml/v3"
 )
 

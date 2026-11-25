@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/rosaldo/agency-agents/quant-engine/exchange"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/exchange"
 )
 
 // addPlan is a tranche of 5 at 100 with a stop tightened from 90 to 92.

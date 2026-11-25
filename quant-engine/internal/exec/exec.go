@@ -10,8 +10,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/rosaldo/agency-agents/quant-engine/exchange"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/journal"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/exchange"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/journal"
 )
 
 // ErrHalt means a stop could not be placed: the position was flattened and

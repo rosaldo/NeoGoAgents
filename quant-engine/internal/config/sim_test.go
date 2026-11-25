@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/rosaldo/agency-agents/quant-engine/strategy/example"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/strategy/example"
 )
 
 // simYAML is a real venue's yml with the sim block appended by each test.

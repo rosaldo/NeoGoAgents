@@ -16,8 +16,8 @@ import (
 	neturl "net/url"
 	"time"
 
-	"github.com/rosaldo/agency-agents/quant-engine/internal/config"
-	"github.com/rosaldo/agency-agents/quant-engine/internal/news"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/config"
+	"github.com/rosaldo/NeoGoAgents/quant-engine/internal/news"
 )
 
 // Endpoint is TypeSafe's classification endpoint.
