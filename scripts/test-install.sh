@@ -11,8 +11,9 @@
 #   * bash 3.2 + BSD userland, no jq, no GNU-only flags.
 #   * Never touches the real $HOME. Every case runs with HOME set to a fresh
 #     sandbox, so a broken default path writes into the sandbox, not your config.
-#   * Only exercises the two source tools (claude-code, copilot) so no case
-#     depends on convert.sh output being present or fresh.
+#   * Install cases exercise the two source tools (claude-code, copilot) so no
+#     case depends on convert.sh output being present or fresh; the OpenCode cap
+#     cases below are --dry-run only and use a fake `opencode --version`.
 #
 # Usage: ./scripts/test-install.sh [-v]
 #   -v  echo the installer's own output for failing cases
@@ -497,6 +498,80 @@ home="$(sandbox bin-missing)"
 AGENCY_PLATFORM=darwin-arm64 run_fixture_install "$home" --agent quant-trader
 assert_eq 1 "$([[ ! -e "$home/.claude/skills/bin-skill" && "$RUN_OUT" == *download* ]] && echo 1 || echo 0)" \
   "an asset that cannot be downloaded refuses the skill"
+
+# ---------------------------------------------------------------------------
+# 8. OpenCode capacity warning is version-aware
+#
+# #27988 was a silent scan abort on early OpenCode builds (reported on v1.15.3),
+# not a hard 119-agent cap. v2.2.7 started logging skipped agent files, and
+# v2.4.0 fixed frontmatter repair that skipped agents. The installer must warn
+# only for versions that still drop agents silently. A fake `opencode --version`
+# on PATH keeps these cases offline and deterministic.
+# ---------------------------------------------------------------------------
+echo ""
+echo "opencode version-aware cap warning"
+
+run_install_oc_version() {
+  local home="$1" version="$2"; shift 2
+  local bindir="$SANDBOX_ROOT/fake-bin-${version//./_}"
+  mkdir -p "$bindir"
+  if [[ "$version" == "unknown" ]]; then
+    printf '#!/bin/sh\nprintf "opencode development build\\n"\n' > "$bindir/opencode"
+  else
+    printf '#!/bin/sh\n[ "$1" = "--version" ] && printf "opencode v%%s\\n" "%s"\n' "$version" > "$bindir/opencode"
+  fi
+  chmod +x "$bindir/opencode"
+  RUN_OUT="$(HOME="$home" PATH="$bindir:$PATH" "$INSTALL" --no-interactive --no-convert --dry-run --tool opencode "$@" 2>&1)"
+  RUN_STATUS=$?
+  $VERBOSE && printf '%s\n' "$RUN_OUT"
+  return 0
+}
+
+# warned — 1 when the last dry-run emitted the #27988 warning.
+warned() { [[ "$RUN_OUT" == *"#27988"* ]] && echo 1 || echo 0; }
+
+home="$(sandbox oc-bug-report-version)"
+run_install_oc_version "$home" "1.15.3"
+assert_eq 1 "$(warned)" "OpenCode 1.15.3 (version in #27988) gets the cap warning"
+
+home="$(sandbox oc-last-affected)"
+run_install_oc_version "$home" "2.2.6"
+assert_eq 1 "$(warned)" "OpenCode 2.2.6 still gets the cap warning"
+
+home="$(sandbox oc-first-fixed)"
+run_install_oc_version "$home" "2.2.7"
+assert_eq 0 "$(warned)" "OpenCode 2.2.7 no longer gets the silent-drop warning"
+
+home="$(sandbox oc-installed)"
+run_install_oc_version "$home" "2.3.2"
+assert_eq 0 "$(warned)" "OpenCode 2.3.2 (measured 283/283 registered) gets no cap warning"
+
+home="$(sandbox oc-future)"
+run_install_oc_version "$home" "2.4.1"
+assert_eq 0 "$(warned)" "future OpenCode versions get no cap warning"
+
+home="$(sandbox oc-unknown)"
+run_install_oc_version "$home" "unknown"
+assert_eq 1 "$(warned)" "an unparseable OpenCode version keeps the conservative warning"
+
+home="$(sandbox oc-small-selection)"
+run_install_oc_version "$home" "1.15.3" --division testing
+assert_eq 0 "$(warned)" "an affected version with a small selection is not warned"
+
+# OPENCODE_BIN overrides which binary is probed (handy when an old V1 binary
+# shadows the V2 one earlier in PATH).
+home="$(sandbox oc-bin-override)"
+affected_bin="$SANDBOX_ROOT/fake-bin-override"
+fixed_bin="$SANDBOX_ROOT/fixed-opencode"
+mkdir -p "$affected_bin" "$fixed_bin"
+printf '#!/bin/sh\n[ "$1" = "--version" ] && printf "opencode v1.15.3\\n"\n' > "$affected_bin/opencode"
+printf '#!/bin/sh\n[ "$1" = "--version" ] && printf "opencode v2.3.2\\n"\n' > "$fixed_bin/opencode"
+chmod +x "$affected_bin/opencode" "$fixed_bin/opencode"
+RUN_OUT="$(HOME="$home" PATH="$affected_bin:$PATH" OPENCODE_BIN="$fixed_bin/opencode" \
+  "$INSTALL" --no-interactive --no-convert --dry-run --tool opencode 2>&1)"
+RUN_STATUS=$?
+$VERBOSE && printf '%s\n' "$RUN_OUT"
+assert_eq 0 "$(warned)" "OPENCODE_BIN probes the chosen binary, not the first one on PATH"
 
 # ---------------------------------------------------------------------------
 echo ""

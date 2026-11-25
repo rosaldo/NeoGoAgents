@@ -109,7 +109,7 @@ Browse the agents below and copy/adapt the ones you need!
 ./scripts/install.sh --tool opencode --division engineering --dry-run
 ```
 
-> **OpenCode note:** OpenCode's runtime currently registers only ~119 agents and silently drops the rest ([upstream bug](https://github.com/anomalyco/opencode/issues/27988)). Installing a subset with `--division` keeps you under that limit. The installer warns you when a selection would exceed it.
+> **OpenCode note:** Older OpenCode versions (before v2.2.7) could silently stop scanning agent files after a bad frontmatter file and leave the rest unregistered ([upstream bug](https://github.com/anomalyco/opencode/issues/27988), reported on v1.15.3); the famous "~119 agents" was that abort, not a hard cap. v2.2.7 began logging skipped files, v2.4.0 fixed frontmatter repair that skipped agents, and a direct check of v2.3.2 registered all 283 agents of this roster. The installer reads `opencode --version` and warns only for affected versions; if the version cannot be read, it keeps the warning as a conservative default. If an old V1 binary shadows V2 in your `PATH`, point it at the one you actually use, e.g. `OPENCODE_BIN=/usr/bin/opencode ./scripts/install.sh --tool opencode`. You can still narrow a selection with `--division`.
 
 See the [Multi-Tool Integrations](#-multi-tool-integrations) section below for full details.
 

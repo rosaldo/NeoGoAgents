@@ -397,15 +397,67 @@ ensure_converted() {
 }
 AUTO_CONVERT=true     # --no-convert disables
 
-# Per-tool soft capacity (opencode silently drops past ~119 — upstream #27988).
-tool_cap() { case "$1" in opencode) echo 119 ;; *) echo 0 ;; esac; }
+# Per-tool soft capacity. #27988 was a silent scan abort on early OpenCode
+# builds (reported on v1.15.3): one bad frontmatter file aborted discovery, so
+# every agent after it never registered — the "~119 agents" was the alphabet-
+# ical tail being cut, not a hard cap. Upstream V2 began logging skipped agent
+# files in v2.2.7 (#62464/#62251) and fixed frontmatter repair that skipped
+# agents in v2.4.0 (#65119). Warn only for versions that still drop silently;
+# an unreadable version keeps the warning (conservative default).
+OPENCODE_QUIET_CAP_VERSION="2.2.7"
+_OPENCODE_CAP_AFFECTED=""
 
-# capacity_warn <tool> <count> — warn if a tool can't register this many.
+# version_at_least <current> <minimum> — numeric dotted comparison, no sort -V
+# (the repo targets bash 3.2 + BSD userland).
+version_at_least() {
+  local cur="$1" min="$2" c m i cv mv
+  IFS=. read -r -a c <<< "$cur"
+  IFS=. read -r -a m <<< "$min"
+  for (( i=0; i<${#m[@]}; i++ )); do
+    cv="${c[$i]:-0}"; mv="${m[$i]:-0}"
+    cv="${cv//[^0-9]/}"; mv="${mv//[^0-9]/}"
+    [[ -z "$cv" ]] && cv=0
+    [[ -z "$mv" ]] && mv=0
+    (( 10#$cv > 10#$mv )) && return 0
+    (( 10#$cv < 10#$mv )) && return 1
+  done
+  return 0
+}
+
+# opencode_version — echo the installed version (e.g. "opencode v2.3.2" -> 2.3.2).
+# OPENCODE_BIN can point at a specific binary when an old V1 shadows V2 in PATH.
+opencode_version() {
+  local bin="${OPENCODE_BIN:-opencode}" v
+  command -v "$bin" >/dev/null 2>&1 || return 1
+  v="$("$bin" --version 2>/dev/null | sed -nE 's/.*v([0-9]+(\.[0-9]+)*).*/\1/p' | head -n 1)"
+  [[ -n "$v" ]] && printf '%s' "$v"
+}
+
+# opencode_cap_affected — cached; 0 when this version no longer drops silently.
+opencode_cap_affected() {
+  [[ -n "$_OPENCODE_CAP_AFFECTED" ]] && { [[ "$_OPENCODE_CAP_AFFECTED" == 1 ]]; return; }
+  local v; v="$(opencode_version)"
+  if [[ -z "$v" ]] || ! version_at_least "$v" "$OPENCODE_QUIET_CAP_VERSION"; then
+    _OPENCODE_CAP_AFFECTED=1
+  else
+    _OPENCODE_CAP_AFFECTED=0
+  fi
+  [[ "$_OPENCODE_CAP_AFFECTED" == 1 ]]
+}
+
+tool_cap() {
+  case "$1" in
+    opencode) opencode_cap_affected && echo 119 || echo 0 ;;
+    *) echo 0 ;;
+  esac
+}
+
+# capacity_warn <tool> <count> — warn if an affected tool can't register this many.
 capacity_warn() {
   local cap; cap="$(tool_cap "$1")"
   if [[ "$cap" -gt 0 && "$2" -gt "$cap" ]]; then
-    warn "$1: registers only ~$cap agents (upstream bug anomalyco/opencode#27988)."
-    warn "      You selected $2 — ~$(( $2 - cap )) won't load. Narrow with --division to fix."
+    warn "$1: versions before $OPENCODE_QUIET_CAP_VERSION can silently skip agents (upstream bug anomalyco/opencode#27988)."
+    warn "      You selected $2 — ~$(( $2 - cap )) may not load. Upgrade OpenCode or narrow with --division."
   fi
 }
 
@@ -661,8 +713,8 @@ _teams_summary() {
 }
 _teams_warn() {
   local a cap; a="$(_teams_agents)"; cap="$(tool_cap opencode)"
-  if _opencode_selected && [[ "$a" -gt "$cap" ]]; then
-    printf "⚠ OpenCode registers ~%s; ~%s of %s won't load (#27988)" "$cap" "$(( a - cap ))" "$a"
+  if _opencode_selected && [[ "$cap" -gt 0 && "$a" -gt "$cap" ]]; then
+    printf "⚠ OpenCode before %s can skip ~%s of %s agents (#27988)" "$OPENCODE_QUIET_CAP_VERSION" "$(( a - cap ))" "$a"
   fi
 }
 _opencode_selected() {
@@ -735,8 +787,8 @@ screen_review() {
     else buf+="    ${C_GREEN}Install${C_RESET}   ${C_DIM}↑/↓ move · space toggle mode · ← back · q quit${C_RESET}"$'\n'; fi
     # warnings
     local cap; cap="$(tool_cap opencode)"
-    if printf '%s\n' "${tools[@]}" | grep -qx "OpenCode" && [[ "$agents" -gt "$cap" ]]; then
-      buf+="  ${C_YELLOW}⚠ OpenCode registers ~${cap}; ~$(( agents - cap )) of ${agents} won't load (#27988)${C_RESET}"$'\n'
+    if printf '%s\n' "${tools[@]}" | grep -qx "OpenCode" && [[ "$cap" -gt 0 && "$agents" -gt "$cap" ]]; then
+      buf+="  ${C_YELLOW}⚠ OpenCode before ${OPENCODE_QUIET_CAP_VERSION} can skip ~$(( agents - cap )) of ${agents} agents (#27988)${C_RESET}"$'\n'
     fi
     draw_frame "$buf"
     local key; key="$(read_key)"
@@ -1647,7 +1699,7 @@ main() {
     for _t in "${SELECTED_TOOLS[@]}"; do
       _cap="$(tool_cap "$_t")"
       [[ "$_cap" -gt 0 && "$agents" -gt "$_cap" ]] && \
-        warn "$_t caps ~$_cap — ~$(( agents - _cap )) of $agents won't register (anomalyco/opencode#27988)"
+        warn "$_t before $OPENCODE_QUIET_CAP_VERSION can silently skip ~$(( agents - _cap )) of $agents (anomalyco/opencode#27988)"
     done
     printf "\n"; exit 0
   fi
