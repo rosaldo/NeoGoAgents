@@ -2,6 +2,7 @@
 
 > Generated from git by `scripts/gen-changelog.sh` — do not edit by hand.
 
+- **v2.7.12** (2026-11-25) · `docs` — align drift docs with advisory CI on pull requests
 - **v2.7.11** (2026-11-25) · `fix` — close Python verifier gaps with versioned fixtures
 - **v2.7.10** (2026-11-25) · `fix` — restore references for split agents in link mode
 - **v2.7.9** (2026-11-24) · `docs` — align contributor docs with local manifest gate

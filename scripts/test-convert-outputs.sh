@@ -30,10 +30,11 @@
 #   never collide on this file. Hashes are platform-neutral: forward-slash paths
 #   and LF line endings, so a Windows checkout produces the same manifest.
 #
-#   Contributors adding/editing agents do NOT need to touch the manifest: CI runs
-#   this with --drift=advisory on pull requests (drift is printed, not failed) and
-#   maintainers regenerate it when the PR lands. A generator change should ship
-#   with --update so the tool line moves in the same commit.
+#   Enforcement differs by context: the local commit gate (scripts/commit.sh)
+#   fails on any drift, so contributors regenerate with --update in the same
+#   commit. CI runs this with --drift=advisory on pull requests (drift is
+#   printed, not failed) and enforces it on pushes to main. A generator change
+#   should always ship with --update so the tool line moves in the same commit.
 #
 # Usage:
 #   ./scripts/test-convert-outputs.sh                   # generate into a temp dir, check everything
