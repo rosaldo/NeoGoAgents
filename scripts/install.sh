@@ -36,7 +36,8 @@
 #   --agents-file <path>  Agents listed in a file (one slug/name per line, # comments ok)
 #
 # Mode:
-#   --link                Symlink instead of copy (updates propagate)
+#   --link                Symlink instead of copy (updates propagate for unsplit
+#                         agents; split agents need a re-run after edits)
 #   --path <dir>          Override the install directory (single destination)
 #
 # Behavior:
@@ -290,6 +291,11 @@ install_file() {
 # raw-source formats cannot drift apart.
 install_agent_md() {
   local src="$1" dest="$2"
+  if $USE_LINK && [[ ! -f "$src.reference.md" ]]; then
+    # Nothing to inline: keep the original --link contract, edits propagate.
+    ln -sf "$src" "$dest"
+    return
+  fi
   # Preserve the frontmatter verbatim (name/description/color/emoji/vibe),
   # then append the body + reference produced by get_body. Do not regenerate
   # the frontmatter: quoting rules and values are owned by the source file.
@@ -297,7 +303,8 @@ install_agent_md() {
   printf '\n' >> "$dest.tmp"
   get_body "$src" >> "$dest.tmp"
   if $USE_LINK; then
-    # A symlink needs a stable target containing the combined content.
+    # One .md cannot live-link two source files. A split agent therefore gets
+    # a combined snapshot; re-run install.sh after editing either source.
     local cache="$dest.combined"
     mv "$dest.tmp" "$cache"
     ln -sf "$cache" "$dest"

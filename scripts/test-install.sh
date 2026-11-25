@@ -357,6 +357,16 @@ run_install "$home" --tool claude-code --link --division engineering --path "$de
 links=$(find "$dest" -maxdepth 1 -type l | wc -l | tr -d ' ')
 assert_eq "$ENG_AGENTS" "$links" "--link creates symlinks, not copies"
 
+# A combined snapshot is unavoidable for a split agent (one .md cannot point
+# at two sources), but an agent without a .reference.md must stay a live link
+# to its source — that is the whole promise of --link.
+unsplit="engineering-ai-data-remediation-engineer"
+[[ -f "$REPO_ROOT/engineering/$unsplit.reference.md" ]] \
+  && fail "canary agent is split; pick another unsplit agent" \
+  || assert_eq "$REPO_ROOT/engineering/$unsplit.md" \
+     "$(readlink "$dest/$unsplit.md")" \
+     "--link keeps unsplit agents live-linked to their source"
+
 home="$(sandbox idempotent)"
 dest="$home/dest"
 run_install "$home" --tool claude-code --division engineering --path "$dest"
