@@ -2,6 +2,7 @@
 
 > Generated from git by `scripts/gen-changelog.sh` — do not edit by hand.
 
+- **v2.7.9** (2026-11-24) · `docs` — align contributor docs with local manifest gate
 - **v2.7.8** (2026-11-24) · `fix` — restore live links for unsplit agents in link mode
 - **v2.7.7** (2026-11-24) · `build` — run convert-output drift check in local gate
 - **v2.7.6** (2026-11-24) · `fix` — close Python tooling verifier blind spots
