@@ -4,8 +4,10 @@
 Claude Code, Copilot and the Hermes router each consume ONE file/string. They
 cannot follow a sibling <agent>.reference.md, so the full agent (frontmatter +
 core + reference) must be inlined by install.sh and build-hermes-plugin.py.
-This test walks all 167 split agents through the three paths that used to drop
-the reference, and fails on the first missing marker.
+This test walks all 167 split agents through five paths that can drop the
+reference — Claude Code and Copilot in both copy and --link mode, plus Hermes —
+and fails on the first missing marker. v2.7.8 broke --link by testing the
+nonexistent `<agent>.md.reference.md` instead of `<agent>.reference.md`.
 """
 from __future__ import annotations
 
@@ -66,25 +68,31 @@ def main() -> int:
 
     with tempfile.TemporaryDirectory(prefix="identity-reference-") as tmp:
         base = Path(tmp)
-        for tool in ("claude-code", "copilot"):
-            dest = base / tool
-            env = {**os.environ, "HOME": str(base / "home")}
-            if tool == "copilot":
-                env["COPILOT_AGENT_DIR"] = str(dest)
-            run = subprocess.run(
-                [str(INSTALL), "--no-interactive", "--tool", tool, "--path", str(dest)],
-                cwd=ROOT, env=env, capture_output=True, text=True,
-            )
-            if run.returncode != 0:
-                failures.append(f"{tool}: install failed: {run.stderr.strip()[:200]}")
-                continue
-            for division, source, reference in agents:
-                installed = dest / source.name
-                if not installed.is_file():
-                    failures.append(f"{tool}: {division}/{source.name} not installed")
+        for mode in ("copy", "link"):
+            for tool in ("claude-code", "copilot"):
+                dest = base / f"{tool}-{mode}"
+                env = {**os.environ, "HOME": str(base / "home")}
+                if tool == "copilot":
+                    env["COPILOT_AGENT_DIR"] = str(dest)
+                command = [str(INSTALL), "--no-interactive", "--tool", tool,
+                           "--path", str(dest)]
+                if mode == "link":
+                    command.append("--link")
+                run = subprocess.run(command, cwd=ROOT, env=env,
+                                     capture_output=True, text=True)
+                if run.returncode != 0:
+                    failures.append(f"{tool}-{mode}: install failed: "
+                                    f"{run.stderr.strip()[:200]}")
                     continue
-                assert_full_agent(f"{tool}:{source.name}",
-                                  installed.read_text(encoding="utf-8"), source, reference)
+                for division, source, reference in agents:
+                    installed = dest / source.name
+                    if not installed.is_file():
+                        failures.append(f"{tool}-{mode}: {division}/{source.name} "
+                                        "not installed")
+                        continue
+                    assert_full_agent(f"{tool}-{mode}:{source.name}",
+                                      installed.read_text(encoding="utf-8"),
+                                      source, reference)
 
         out = base / "hermes"
         run = subprocess.run(
@@ -118,7 +126,7 @@ def main() -> int:
             print(f"  ...and {len(failures) - 20} more")
         print(f"FAILED: {len(failures)} check(s)")
         return 1
-    print(f"PASSED: {len(agents)} split agents x 3 identity paths")
+    print(f"PASSED: {len(agents)} split agents x 5 identity paths (copy/link x 2 tools + Hermes)")
     return 0
 
 

@@ -291,7 +291,9 @@ install_file() {
 # raw-source formats cannot drift apart.
 install_agent_md() {
   local src="$1" dest="$2"
-  if $USE_LINK && [[ ! -f "$src.reference.md" ]]; then
+  # src ends in ".md"; the split reference is its sibling <stem>.reference.md.
+  local reference="${src%.md}.reference.md"
+  if $USE_LINK && [[ ! -f "$reference" ]]; then
     # Nothing to inline: keep the original --link contract, edits propagate.
     ln -sf "$src" "$dest"
     return
