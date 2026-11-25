@@ -38,8 +38,8 @@ run_check() {
 }
 
 # The gate runs BEFORE the bump: a broken commit never becomes a version, and a
-# version never becomes a tag. test-convert-outputs.sh is included: a stale
-# convert-outputs manifest must fail locally, not only in CI.
+# version never becomes a tag. It mirrors CI's checks: a stale convert-outputs
+# manifest and a Python-tooling regression must fail locally, not only in CI.
 gate() {
   if [[ "${AGENCY_SKIP_GATE:-}" == 1 ]]; then
     echo "warning: gate skipped (AGENCY_SKIP_GATE=1)" >&2
@@ -55,10 +55,13 @@ gate() {
 
   run_check lint-agents.sh
   run_check check-python-tooling.py
+  run_check test-python-tooling.py
+  run_check check-tools.sh
   run_check check-divisions.sh
   run_check check-context.sh --strict-core
   run_check test-install.sh
   run_check test-identity-reference.py
+  run_check test-convert-frontmatter.sh
   run_check test-convert-outputs.sh
   run_check test-versioning.sh
   run_check test-push.sh

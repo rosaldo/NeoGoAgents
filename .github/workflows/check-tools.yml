@@ -41,6 +41,9 @@ jobs:
       - name: Enforce uvx-only Python tooling in every source area
         run: uvx python scripts/check-python-tooling.py
 
+      - name: Regression-test the Python tooling guard
+        run: uvx python scripts/test-python-tooling.py
+
       # Task 17 split 167 bodies into <agent>.reference.md. Claude Code and
       # Copilot install one .md and Hermes stores one body string: without this
       # check they silently lose the reference half of the agent.

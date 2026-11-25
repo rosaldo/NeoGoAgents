@@ -5,15 +5,17 @@ The Task 29 grep only looked at *.sh, *.py and *.md in the agent divisions, so
 seven extensionless scripts under skills/motion-studio/scripts/ kept `uv run`
 and the check still printed zero. This check walks every source area, including
 extensionless scripts, .reference.md files, skills/, integrations/, CI, the
-repository root, examples/ and quant-engine/, and fails on any legacy
-invocation. It lives in the repo and runs in the commit gate.
+repository root, examples/, quant-engine/ and the PR template, and fails on any
+legacy invocation. It lives in the repo, runs in the commit gate, and has a
+versioned regression test (scripts/test-python-tooling.py).
 
 Allowed: uvx <tool>, uvx python -m ..., uvx --with <pkg> python -c "..."
-Blocked: pip*, uv add/run/sync/tool install/uv pip, bare python/python3 calls.
+Blocked: pip*, uv add/run/sync/tool install/uv pip, bare python/python3 calls,
+including versioned interpreters (python3.11) and legacy shebangs.
 
-Prohibition prose ("Never pip", "avoid `python`", "don't use uv run") is not a
-violation, but the exemption is per match, never per line: a real command later
-on the same line is still caught.
+Prohibition prose ("Never pip", "avoid `python`") is not a violation, but the
+exemption is per match and per clause: a comma followed by "use"/"run" starts a
+real recommendation, so "Don't use uv run, use pip install" is still caught.
 """
 from __future__ import annotations
 
@@ -25,23 +27,29 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DIVISIONS = json.loads((ROOT / "divisions.json").read_text(encoding="utf-8"))["divisions"]
 
+PY = r"python3?(?:\.\d+)*(?![-\w])"
 OLD_CONVENTION = "All Python you write, run or recommend goes through `uv`"
 BAD_UV = re.compile(r"\buv\s+(?:add|run|sync|tool\s+install|pip)\b")
-BAD_PIP = re.compile(r"\bpip3?(?![-\w])\b(?!\s+audit\b)|\bpipx\b|\bpython3?\s+-m\s+pip\b")
+BAD_PIP = re.compile(
+    r"\bpip3?(?![-\w])\b(?!\s+audit\b)|\bpipx\b|\b" + PY + r"\s+-m\s+pip\b"
+)
 # A bare interpreter sits in command position: line start, $(), a YAML `run:`
-# value, a Dockerfile RUN, an env/exec wrapper, a shell pipeline, or immediately
-# inside backticks. Prose ("Python examples"), package names (`python-pptx`) and
-# table cells are not calls. uvx invocations are removed before this test runs.
+# or `Setup:` value, a Dockerfile RUN/CMD, a JSON command key, an env/exec
+# wrapper, a shell pipeline, or immediately inside backticks. Prose ("Python
+# examples"), package names (`python-pptx`) and table cells are not calls.
+# uvx invocations are removed before this test runs.
 CALL = re.compile(
-    r"(?:^\s*|\$\(|\brun\s*:\s*|\bRUN\s+|\b(?:env|exec|command|sudo)\s+)"
-    r"python3?(?![-\w])(?=\s+(?:-|\S+\.py\b|['\"])|$)",
+    r"(?:^\s*|\$\(|\brun\s*:\s*|\b(?:setup|step|script)\s*:\s*|\bRUN\s+|"
+    r"\b(?:env|exec|execute|command|sudo)\s+)" + PY
+    + r"(?=\s+(?:-|\S+\.py\b|['\"])|$)",
     re.I,
 )
-CALL_BACKTICK = re.compile(r"(?<!``)`python3?(?![-\w])", re.I)
-CALL_PIPE = re.compile(
-    r"[|&;]\s*python3?(?![-\w])\s+(?:-[\w]|['\"]|\S+\.py\b)", re.I
-)
-ALLOWED_UVX = re.compile(r"\buvx(?:\s+\S+)*?\s+python3?\b")
+CALL_BACKTICK = re.compile(r"(?<!``)`" + PY, re.I)
+CALL_PIPE = re.compile(r"[|&;]\s*" + PY + r"\s+(?:-[\w]|['\"]|\S+\.py\b)", re.I)
+CALL_JSON = re.compile(r"['\"](?:command|cmd|run|exec|script)['\"]\s*:\s*['\"]" + PY, re.I)
+CALL_CMD = re.compile(r"\bCMD\s*\[\s*['\"]?" + PY, re.I)
+SHEBANG = re.compile(r"^#!\s*(?:/usr/bin/env\s+)?(?:\S*/)?" + PY, re.I)
+ALLOWED_UVX = re.compile(r"\buvx(?:\s+\S+)*?\s+python3?(?:\.\d+)*\b")
 FENCE = re.compile(r"^\s*```")
 SKIP_DIRS = {"__pycache__", ".git", "node_modules", "dist"}
 TEXT_SUFFIXES = {".md", ".sh", ".py", ".yaml", ".yml", ".toml", ".json", ".mdc", ".txt"}
@@ -49,6 +57,12 @@ PROHIBITION = re.compile(
     r"\b(?:never|no|nor|avoid|forbidden|prohibited|reject|do\s+not|don't|"
     r"falls\s+back\s+to|instead\s+of)\b",
     re.I,
+)
+# List items that keep a prohibition alive after a comma: "Never `pip`, `pip3`
+# or `python -m pip`". Anything else after a comma ("use pip", "run pip")
+# starts a new instruction and is a real violation.
+LIST_CONTINUES = re.compile(
+    r"['\"` ]*(?:pip3?\b|pipx\b|uv\b|" + PY + r"|or\b|nor\b|and\b|bare\b)", re.I
 )
 # Words that may sit between a prohibition and the forbidden token. Nothing
 # else is allowed, so "never do X and then pip install" is still a violation.
@@ -61,18 +75,34 @@ FILLER = {
     "tool", "use", "used", "uses", "using", "uv",
 }
 # Detectors need to spell the forbidden tokens to recognize them. Skip their
-# own source; lint-agents.sh is the older agent-body detector.
-DETECTORS = {Path(__file__).resolve(), (ROOT / "scripts" / "lint-agents.sh").resolve()}
+# own source and the versioned fixture test.
+DETECTORS = {
+    (ROOT / "scripts" / name).resolve()
+    for name in ("check-python-tooling.py", "test-python-tooling.py", "lint-agents.sh")
+}
+
+
+def clause_before(line: str, start: int) -> str:
+    """Text before `start`, with non-list commas turned into hard boundaries."""
+    before = line[:start]
+
+    def comma(match: re.Match[str]) -> str:
+        # Look at the rest of the ORIGINAL line, not just the text before this
+        # match: at pip3 in "Never `pip`, `pip3`, ..." only " `" is before it.
+        return "," if LIST_CONTINUES.match(line[match.end():]) else ";"
+
+    return re.sub(r",", comma, before)
 
 
 def prohibited_match(line: str, start: int) -> bool:
     """True only when a nearby prohibition directly qualifies this match.
 
-    The nearest prohibition wins. An em dash, semicolon or sentence boundary
-    starts a new thought, so a real command after it is never covered by an
-    earlier "Never"/"avoid".
+    The nearest prohibition wins. A sentence boundary, em dash, semicolon or a
+    comma that starts a new instruction ("..., use pip install") closes the
+    exemption, so a real command after it is never covered by an earlier
+    "Never"/"avoid".
     """
-    clause = re.split(r"[.!?;—\n]", line[:start])[-1]
+    clause = re.split(r"[.!?;—\n]", clause_before(line, start))[-1]
     matches = list(PROHIBITION.finditer(clause))
     if not matches:
         return False
@@ -119,7 +149,7 @@ def text_files(base: Path, *, all_files: bool = False):
 def root_files():
     """Top-level files, including extensionless ones such as a root Dockerfile."""
     for path in ROOT.iterdir():
-        if path.is_file() and path.name not in {"VERSION"}:
+        if path.is_file() and path.name != "VERSION":
             yield path
 
 
@@ -139,8 +169,15 @@ def scan_area(label: str, paths) -> list[str]:
                 for m in pattern.finditer(line):
                     if not prohibited_match(line, m.start()):
                         found.add(f"{where}: {kind}: {line.strip()[:110]}")
+            if SHEBANG.match(line):
+                found.add(f"{where}: bare-python shebang: {line.strip()[:110]}")
             leftover = ALLOWED_UVX.sub(" ", line)
-            for pattern in (CALL, CALL_BACKTICK, CALL_PIPE):
+            # A `"command": "python"` key is a real command only in a JSON
+            # config. The same snippet in Markdown/MDC is documentation.
+            patterns = (CALL, CALL_BACKTICK, CALL_PIPE, CALL_CMD)
+            if path.suffix == ".json":
+                patterns += (CALL_JSON,)
+            for pattern in patterns:
                 for m in pattern.finditer(leftover):
                     if not prohibited_match(leftover, m.start()):
                         found.add(f"{where}: bare python call: {line.strip()[:110]}")
@@ -163,16 +200,14 @@ def main() -> int:
                        text_files(ROOT / "skills", all_files=True))
     total += scan_area("scripts", text_files(ROOT / "scripts", all_files=True))
     total += scan_area("integrations", text_files(ROOT / "integrations", all_files=True))
-    total += scan_area("ci", text_files(ROOT / ".github" / "workflows"))
+    total += scan_area(".github (incl. PR template)",
+                       text_files(ROOT / ".github", all_files=True))
     total += scan_area(".claude", text_files(ROOT / ".claude", all_files=True))
 
-    shebangs = [p for p in (ROOT / "scripts").glob("*.py")
-                if p.read_text(encoding="utf-8", errors="replace").startswith(
-                    "#!/usr/bin/env python3")]
+    shebangs = [item for item in total if "shebang" in item]
     print(f"bare-python shebangs: {len(shebangs)}")
-    for path in shebangs:
-        print(f"  {path.relative_to(ROOT)}")
-    total += [(str(p), "shebang") for p in shebangs]
+    for item in shebangs:
+        print(f"  {item}")
 
     print("FAILED" if total else "PASSED")
     return 1 if total else 0
