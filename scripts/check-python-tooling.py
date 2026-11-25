@@ -10,8 +10,9 @@ legacy invocation. It lives in the repo, runs in the commit gate, and has a
 versioned regression test (scripts/test-python-tooling.py).
 
 Allowed: uvx <tool>, uvx python -m ..., uvx --with <pkg> python -c "..."
-Blocked: pip*, uv add/run/sync/tool install/uv pip, bare python/python3 calls,
-including versioned interpreters (python3.11) and legacy shebangs.
+Blocked: pip*, uv add/run/sync/tool install/uv pip, bare python/python2/python3
+calls, including versioned interpreters (python2.7, python3.11) and legacy
+shebangs.
 
 Prohibition prose ("Never pip", "avoid `python`") is not a violation, but the
 exemption is per match and per clause: a comma followed by "use"/"run" starts a
@@ -27,7 +28,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DIVISIONS = json.loads((ROOT / "divisions.json").read_text(encoding="utf-8"))["divisions"]
 
-PY = r"python3?(?:\.\d+)*(?![-\w])"
+PY = r"python(?:2|3)?(?:\.\d+)*(?![-\w])"
 OLD_CONVENTION = "All Python you write, run or recommend goes through `uv`"
 BAD_UV = re.compile(r"\buv\s+(?:add|run|sync|tool\s+install|pip)\b")
 BAD_PIP = re.compile(
@@ -49,7 +50,7 @@ CALL_PIPE = re.compile(r"[|&;]\s*" + PY + r"\s+(?:-[\w]|['\"]|\S+\.py\b)", re.I)
 CALL_JSON = re.compile(r"['\"](?:command|cmd|run|exec|script)['\"]\s*:\s*['\"]" + PY, re.I)
 CALL_CMD = re.compile(r"\bCMD\s*\[\s*['\"]?" + PY, re.I)
 SHEBANG = re.compile(r"^#!\s*(?:/usr/bin/env\s+)?(?:\S*/)?" + PY, re.I)
-ALLOWED_UVX = re.compile(r"\buvx(?:\s+\S+)*?\s+python3?(?:\.\d+)*\b")
+ALLOWED_UVX = re.compile(r"\buvx(?:\s+\S+)*?\s+python(?:2|3)?(?:\.\d+)*\b")
 FENCE = re.compile(r"^\s*```")
 SKIP_DIRS = {"__pycache__", ".git", "node_modules", "dist"}
 TEXT_SUFFIXES = {".md", ".sh", ".py", ".yaml", ".yml", ".toml", ".json", ".mdc", ".txt"}
@@ -71,7 +72,7 @@ FILLER = {
     "c", "call", "calling", "ci", "code", "direct", "directly", "do", "either",
     "example", "examples", "in", "install", "interpreter", "invoke", "invoking",
     "its", "m", "makefile", "nor", "not", "of", "or", "pip", "pip3", "pipx",
-    "python", "python3", "raw", "run", "running", "sigma", "sync", "the",
+    "python", "python2", "python3", "raw", "run", "running", "sigma", "sync", "the",
     "tool", "use", "used", "uses", "using", "uv",
 }
 # Detectors need to spell the forbidden tokens to recognize them. Skip their

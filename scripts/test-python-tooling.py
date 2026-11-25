@@ -33,6 +33,8 @@ CASES = [
      "Do not use uv sync, run pip install -r requirements.txt\n", True),
     ("versioned-interpreter", "agents/a.md",
      "python3.11 -m venv .venv\n", True),
+    ("python2-install", "agents/a.md",
+     "python2 setup.py install\n", True),
     ("setup-colon", "agents/a.md",
      "Setup: python -m venv .venv\n", True),
     ("mid-sentence-execute", "agents/a.md",
