@@ -36,4 +36,19 @@ assert_quoted \
   "$OUTPUT_DIR/qwen/agents/programmatic-display-buyer.md" \
   tools
 
+# Maestro must be a primary agent in OpenCode so it shows up in the /agents
+# selector like the built-in build/plan agents. Every other agent stays a
+# subagent (available through @mention only).
+assert_mode() {
+  local file="$1" expected="$2" line
+  line="$(awk '$0 ~ /^mode:/ { print; exit }' "$file")"
+  [[ "$line" == "mode: $expected" ]] || {
+    printf 'Expected %s in %s, got: %s\n' "$expected" "$file" "$line" >&2
+    return 1
+  }
+}
+
+assert_mode "$OUTPUT_DIR/opencode/agents/maestro.md" primary
+assert_mode "$OUTPUT_DIR/opencode/agents/code-reviewer.md" subagent
+
 echo "PASS: converted YAML frontmatter keeps scalar values safely quoted"

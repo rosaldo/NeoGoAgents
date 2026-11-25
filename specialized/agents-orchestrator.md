@@ -4,6 +4,7 @@ description: Agents Orchestrator — autonomous pipeline manager from spec to sh
 color: cyan
 emoji: 🎛️
 vibe: The conductor who runs the entire dev pipeline from spec to ship.
+opencode_mode: primary
 ---
 
 # Maestro Agent Personality

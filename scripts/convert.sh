@@ -259,11 +259,20 @@ resolve_opencode_color() {
 
 convert_opencode() {
   local file="$1"
-  local name description color slug outfile body
+  local name description color slug outfile body mode
 
   name="$(get_field "name" "$file")"
   description="$(get_field "description" "$file")"
   color="$(resolve_opencode_color "$(get_field "color" "$file")")"
+  # Agents are subagents by default (they are reached through @mention). A
+  # source may opt into a primary agent — e.g. Maestro, so it appears in the
+  # OpenCode /agents selector like the built-in build/plan agents.
+  mode="$(get_field "opencode_mode" "$file")"
+  [[ -n "$mode" ]] || mode="subagent"
+  case "$mode" in
+    primary|subagent|all) ;;
+    *) warn "$file: invalid opencode_mode '$mode' — using subagent"; mode="subagent" ;;
+  esac
   slug="$(slugify "$name")"
   body="$(get_body "$file")"
 
@@ -276,7 +285,7 @@ convert_opencode() {
 ---
 name: $(yaml_quote "$name")
 description: $(yaml_quote "$description")
-mode: subagent
+mode: ${mode}
 color: '${color}'
 ---
 ${body}

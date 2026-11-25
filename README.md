@@ -64,6 +64,8 @@ Spawn it as a subagent (`@agent-maestro`) or wear it in the main session with th
 cp -r skills/maestro ~/.claude/skills/
 ```
 
+In OpenCode, Maestro is the one agent generated as `primary` (via `opencode_mode: primary` in its source), so it shows up in the `/agents` selector next to `build` and `plan`; every other agent stays a `subagent` for `@mention`. Run `./scripts/convert.sh --tool opencode`, then install, to pick this up.
+
 ### Option 3: Use as Reference
 
 Each agent file contains:
