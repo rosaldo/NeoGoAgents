@@ -9,10 +9,12 @@ repository root, examples/, quant-engine/ and the PR template, and fails on any
 legacy invocation. It lives in the repo, runs in the commit gate, and has a
 versioned regression test (scripts/test-python-tooling.py).
 
-Allowed: uvx <tool>, uvx python -m ..., uvx --with <pkg> python -c "..."
+Allowed: uvx <tool>, uvx python -m ..., uvx python@3.x -m ...,
+uvx -p/--python 3.x python -m ..., uvx --with <pkg> python -c "...".
 Blocked: pip*, uv add/run/sync/tool install/uv pip, bare python/python2/python3
-calls, including versioned interpreters (python2.7, python3.11) and legacy
-shebangs.
+calls, including versioned interpreters (python2.7, python3.11), legacy shebangs,
+and uvx requests for Python 2 (uv itself refuses Python < 3). `uvx python3.11`
+is an accepted alias of the documented `uvx python@3.11` / `uvx -p 3.11 python`.
 
 Prohibition prose ("Never pip", "avoid `python`") is not a violation, but the
 exemption is per match and per clause: a comma followed by "use"/"run" starts a
@@ -50,7 +52,15 @@ CALL_PIPE = re.compile(r"[|&;]\s*" + PY + r"\s+(?:-[\w]|['\"]|\S+\.py\b)", re.I)
 CALL_JSON = re.compile(r"['\"](?:command|cmd|run|exec|script)['\"]\s*:\s*['\"]" + PY, re.I)
 CALL_CMD = re.compile(r"\bCMD\s*\[\s*['\"]?" + PY, re.I)
 SHEBANG = re.compile(r"^#!\s*(?:/usr/bin/env\s+)?(?:\S*/)?" + PY, re.I)
-ALLOWED_UVX = re.compile(r"\buvx(?:\s+\S+)*?\s+python(?:2|3)?(?:\.\d+)*\b")
+# uvx starts an interpreter in an isolated env; the documented version spellings
+# are `python@3.x` and `-p/--python 3.x python`. The `python3.x` command-name
+# alias also works. Python 2 never does: uv answers "Python <3 is not supported".
+PY3 = r"python(?:@?3(?:\.\d+)*)?(?![-\w@])"
+ALLOWED_UVX = re.compile(r"\buvx(?:\s+\S+)*?\s+" + PY3 + r"\b")
+BAD_UVX_PY2 = re.compile(
+    r"\buvx(?:\s+\S+)*?\s+(?:--python|-p)\s*=?\s*2(?:\.\d+)*\b"
+    r"|\buvx(?:\s+\S+)*?\s+python@?2(?:\.\d+)*(?![-\w])"
+)
 FENCE = re.compile(r"^\s*```")
 SKIP_DIRS = {"__pycache__", ".git", "node_modules", "dist"}
 TEXT_SUFFIXES = {".md", ".sh", ".py", ".yaml", ".yml", ".toml", ".json", ".mdc", ".txt"}
@@ -166,7 +176,9 @@ def scan_area(label: str, paths) -> list[str]:
             if FENCE.match(line):
                 continue
             where = f"{path.relative_to(ROOT)}:{number}"
-            for pattern, kind in ((BAD_UV, "uv subcommand"), (BAD_PIP, "pip")):
+            for pattern, kind in ((BAD_UV, "uv subcommand"),
+                                  (BAD_UVX_PY2, "uvx Python 2 request"),
+                                  (BAD_PIP, "pip")):
                 for m in pattern.finditer(line):
                     if not prohibited_match(line, m.start()):
                         found.add(f"{where}: {kind}: {line.strip()[:110]}")

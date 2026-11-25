@@ -35,6 +35,16 @@ CASES = [
      "python3.11 -m venv .venv\n", True),
     ("python2-install", "agents/a.md",
      "python2 setup.py install\n", True),
+    ("uvx-python2-invalid", "agents/a.md",
+     "uvx python2 --version\n", True),
+    ("uvx-python2-dot-invalid", "agents/a.md",
+     "uvx python2.7 --version\n", True),
+    ("uvx-python-at-2-invalid", "agents/a.md",
+     "uvx python@2.7 --version\n", True),
+    ("uvx-python-option-2-invalid", "agents/a.md",
+     "uvx -p 2.7 python --version\n", True),
+    ("uvx-long-option-2-invalid", "agents/a.md",
+     "uvx --python 2.7 python --version\n", True),
     ("setup-colon", "agents/a.md",
      "Setup: python -m venv .venv\n", True),
     ("mid-sentence-execute", "agents/a.md",
@@ -52,6 +62,14 @@ CASES = [
      False),
     ("uvx-is-allowed", "agents/a.md",
      "uvx python -m unittest discover\n", False),
+    ("uvx-alias-version-is-allowed", "agents/a.md",
+     "uvx python3.11 -m unittest discover\n", False),
+    ("uvx-at-version-is-allowed", "agents/a.md",
+     "uvx python@3.11 -m unittest discover\n", False),
+    ("uvx-short-option-version-is-allowed", "agents/a.md",
+     "uvx -p 3.11 python -m unittest discover\n", False),
+    ("uvx-long-option-version-is-allowed", "agents/a.md",
+     "uvx --python 3.11 python -m unittest discover\n", False),
     ("package-name-is-not-a-call", "agents/a.md",
      "- **Python**: `python-pptx`\n", False),
     ("pip-audit-is-a-tool", "agents/a.md", "uvx pip-audit\n", False),
@@ -94,7 +112,9 @@ def main() -> int:
             print(f"  ...and {len(failures) - 10} more")
         print(f"FAILED: {len(failures)} of {len(CASES)} fixture(s)")
         return 1
-    print(f"PASSED: {len(CASES)} fixtures ({len(CASES) - 5} violations / 5 allowed)")
+    violations = sum(1 for case in CASES if case[3])
+    print(f"PASSED: {len(CASES)} fixtures "
+          f"({violations} violations / {len(CASES) - violations} allowed)")
     return 0
 
 

@@ -2,6 +2,7 @@
 
 > Generated from git by `scripts/gen-changelog.sh` — do not edit by hand.
 
+- **v2.7.14** (2026-11-25) · `fix` — allow documented uvx Python version forms, reject Python 2
 - **v2.7.13** (2026-11-25) · `fix` — catch legacy python2 invocations in tooling guard
 - **v2.7.12** (2026-11-25) · `docs` — align drift docs with advisory CI on pull requests
 - **v2.7.11** (2026-11-25) · `fix` — close Python verifier gaps with versioned fixtures
