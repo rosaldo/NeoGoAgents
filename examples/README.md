@@ -4,7 +4,7 @@ This directory contains example outputs demonstrating how the agency's agents ca
 
 ## Why This Exists
 
-The agency-agents repo defines dozens of specialized agents across engineering, design, marketing, product, support, spatial computing, and project management. But agent definitions alone don't show what happens when you **deploy them all at once** on a single mission.
+The NeoGoAgents fork of the upstream agency-agents repo defines 283 specialized agents across all 18 divisions (engineering, design, marketing, product, support, spatial computing, project management, and more). But agent definitions alone don't show what happens when you **deploy them all at once** on a single mission.
 
 These examples answer the question: *"What does it actually look like when the full agency collaborates?"*
 

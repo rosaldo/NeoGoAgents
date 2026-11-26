@@ -7,6 +7,11 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://makeapullrequest.com)
 [![Sponsor](https://img.shields.io/badge/Sponsor-%E2%9D%A4-pink?logo=github)](https://github.com/sponsors/msitarzewski)
 [![Download the app](https://img.shields.io/github/v/release/msitarzewski/agency-agents-app?label=Download%20app&color=2563eb)](https://github.com/msitarzewski/agency-agents-app/releases/latest)
+[![Version](https://img.shields.io/github/v/tag/rosaldo/NeoGoAgents?label=version)](https://github.com/rosaldo/NeoGoAgents/tags)
+
+This is the [`rosaldo/NeoGoAgents`](https://github.com/rosaldo/NeoGoAgents) fork; the v2 line began with the harness-neutral orchestrator in v2.0.0.
+
+Current release: **v2.7.18** (see [CHANGELOG.md](CHANGELOG.md) and [VERSION](VERSION)).
 
 > ### 🆕 There's an app now
 >
@@ -45,6 +50,8 @@ Prefer the command line? The script-based options below install the same agents.
 
 ### Option 2: Use with Claude Code
 
+**Prerequisites:** a checkout of this repo (`git clone https://github.com/rosaldo/NeoGoAgents.git && cd NeoGoAgents`), Bash 3.2+ (Git Bash/WSL on Windows), and the target tool installed. For the optional Go engine, Go 1.25+ (`quant-engine/go.mod`).
+
 ```bash
 # Install all agents to your Claude Code directory
 ./scripts/install.sh --tool claude-code
@@ -58,7 +65,7 @@ cp engineering/*.md ~/.claude/agents/
 
 **Maestro (pipeline orchestrator):** the `maestro` agent runs the full pipeline
 (`Senior Project Manager → UX Architect → [Dev ↔ Evidence Collector] → Reality Checker`).
-Spawn it as a subagent (`@agent-maestro`) or wear it in the main session with the `/maestro` skill:
+Spawn it as a subagent (`@maestro` in harnesses that use the installed `name:` slug) or wear it in the main session with the `/maestro` skill:
 
 ```bash
 cp -r skills/maestro ~/.claude/skills/
@@ -237,6 +244,7 @@ Turning pipeline into revenue through craft, not CRM busywork.
 | 🏋️ [Sales Coach](sales/sales-coach.md) | Rep development, call coaching, pipeline review facilitation | Making every rep and every deal better through structured coaching |
 | 🎯 [Sales Outreach](specialized/sales-outreach.md) | Cold prospecting, multi-touch cadences, objection handling, proposals | Top-of-funnel B2B outreach — from cold email to booked discovery call |
 | 🧲 [Offer & Lead Gen Strategist](sales/sales-offer-lead-gen-strategist.md) | Offers & lead magnets | Top-of-funnel offer construction and lead gen |
+| 📨 [Harvey Outbound](sales/harvey-outbound.md) | Account research, outreach drafting, reply triage | Owner-controlled outbound loop with credentials kept by the owner |
 
 ### 📢 Marketing Division
 
@@ -375,7 +383,7 @@ The unique specialists who don't fit in a box.
 
 | Agent | Specialty | When to Use |
 |-------|-----------|-------------|
-| 🎭 [Agents Orchestrator](specialized/agents-orchestrator.md) | Multi-agent coordination, workflow management | Complex projects requiring multiple agent coordination |
+| 🎛️ [Maestro](specialized/agents-orchestrator.md) | Pipeline orchestration, QA gates | End-to-end spec-to-ship workflows across specialist agents |
 | 🔍 [LSP/Index Engineer](specialized/lsp-index-engineer.md) | Language Server Protocol, code intelligence | Code intelligence systems, LSP implementation, semantic indexing |
 | 📥 [Sales Data Extraction Agent](specialized/sales-data-extraction-agent.md) | Excel monitoring, sales metric extraction | Sales data ingestion, MTD/YTD/Year End metrics |
 | 📈 [Data Consolidation Agent](specialized/data-consolidation-agent.md) | Sales data aggregation, dashboard reports | Territory summaries, rep performance, pipeline snapshots |
@@ -433,6 +441,7 @@ The unique specialists who don't fit in a box.
 | 🧡 [Aging Parent Care Companion](specialized/healthcare-aging-parent-care-companion.md) | Family caregiver decision-support | Appointment/medication coordination, care-team comms, caregiver wellbeing (HIPAA-aligned) |
 | 🏛️ [Master Plan Architect](specialized/specialized-master-plan-architect.md) | Architectural teaching, red-team plan critique | Deep architecture teaching, risk critique, comprehensive Markdown implementation plans (no code execution) |
 | 🎧 [Focus Music Architect](specialized/specialized-focus-music-architect.md) | Instrumental focus-music prompt engineering, neuroacoustics | Soundscape architecture, BPM curves, binaural layers for generative audio models |
+| 🧭 [Career Ops](specialized/career-ops.md) | Role scoring, CV-tailored resume and letter, search tracking | Structured job hunt; the owner always presses submit |
 
 ### 💵 Finance Division
 
@@ -652,6 +661,8 @@ Every commit also runs `scripts/check-context.sh --strict-core` (the same flag C
 
 Python examples and tooling go through `uvx` only (`uvx <tool>`, `uvx python -m …`, `uvx --with <pkg> python -c "…"`). No `pip`, `uv run/add/sync` or bare `python`/`python3`; `scripts/check-python-tooling.py` enforces this across agent sources, skills, scripts, integrations, CI, the repository root, `examples/` and `quant-engine/`. Every commit also runs `scripts/test-convert-outputs.sh`: manifest drift fails locally, so regenerate `scripts/convert-outputs.sha256` with `--update` in the same commit. See `CONTRIBUTING.md`.
 
+The optional Go engine lives in [quant-engine/README.md](quant-engine/README.md). Release history: [CHANGELOG.md](CHANGELOG.md); generated agent catalog: [CATALOG.md](CATALOG.md).
+
 ### Add a New Agent
 
 1. Fork the repository
@@ -729,7 +740,7 @@ Each agent is designed with:
 
 ## 📊 Stats
 
-- 🎭 **230+ Specialized Agents** across every division
+- 🎭 **283 Specialized Agents** across 18 divisions — see [CATALOG.md](CATALOG.md)
 - 📝 **10,000+ lines** of personality, process, and code examples
 - ⏱️ **Months of iteration** from real-world usage
 - 🌟 **Battle-tested** in production environments
@@ -757,6 +768,10 @@ The Agency works natively with Claude Code, and ships conversion + install scrip
 - **[Codex](https://developers.openai.com/codex/overview)** — TOML custom agents → `~/.codex/agents/`
 - **Osaurus** -- `SKILL.md` skills -> `~/.osaurus/skills/`
 - **[Hermes](integrations/hermes/README.md)** -- lazy-router plugin -> `~/.hermes/plugins/`
+- **[Mistral Vibe](integrations/vibe/README.md)** — `.toml` agents + prompts → `~/.vibe/`
+- **ZCode** — `.md` agent files → `~/.zcode/agents/`
+
+For the v2 runtime story, see the [integrations guide](integrations/README.md): the BYOK canonical stack (v2.5.0) and documented technique packs/fallbacks (v2.4.0) are detailed in [Runtime services and technique docs](integrations/README.md#runtime-services-and-technique-docs), split `.reference.md` cores (v2.1.0) in [Contributing](#-contributing), and the per-harness paths (v2.0.2) in the [location map](integrations/README.md#default-locations-per-harness). Those docs own the details; this section stays focused on choosing a tool.
 
 ---
 
@@ -793,13 +808,14 @@ The installer scans your system for installed tools, shows a checkbox UI, and le
   [ ]  8)  [ ]  Aider           (CONVENTIONS.md)
   [ ]  9)  [ ]  Windsurf        (.windsurfrules)
   [ ] 10)  [ ]  Qwen Code       (~/.qwen/agents)
-  [ ] 11)  [ ]  Kimi Code       (~/.config/kimi/agents)
-  [ ] 12)  [ ]  Codex           (~/.codex/agents)
-  [ ] 13)  [ ]  Osaurus         (~/.osaurus/skills)
-  [ ] 14)  [ ]  Hermes          (~/.hermes/plugins)
+  [ ] 11)  [ ]  ZCode           (~/.zcode/agents)
+  [ ] 12)  [ ]  Kimi Code       (~/.config/kimi/agents)
+  [ ] 13)  [ ]  Codex           (~/.codex/agents)
+  [ ] 14)  [ ]  Osaurus         (~/.osaurus/skills)
+  [ ] 15)  [ ]  Hermes          (~/.hermes/plugins)
+  [ ] 16)  [ ]  Mistral Vibe    (~/.vibe/agents)
 
-  [1-14] toggle   [a] all   [n] none   [d] detected
-  [Enter] install   [q] quit
+  space toggle · a all · n none · / search · enter next · q quit
 ```
 
 **Or install a specific tool directly:**
@@ -811,6 +827,8 @@ The installer scans your system for installed tools, shows a checkbox UI, and le
 ./scripts/install.sh --tool codex
 ./scripts/install.sh --tool osaurus
 ./scripts/install.sh --tool hermes
+./scripts/install.sh --tool vibe
+./scripts/install.sh --tool zcode
 ```
 
 **Non-interactive (CI/scripts):**
@@ -1118,7 +1136,7 @@ MIT License - Use freely, commercially or personally. Attribution appreciated bu
 
 ## 🙏 Acknowledgments
 
-What started as a Reddit thread about AI agent specialization has grown into something remarkable — **230+ agents across every division**, supported by a community of contributors from around the world. Every agent in this repo exists because someone cared enough to write it, test it, and share it.
+What started as a Reddit thread about AI agent specialization has grown into something remarkable — **283 agents across every division**, supported by a community of contributors from around the world. Every agent in this repo exists because someone cared enough to write it, test it, and share it.
 
 To everyone who has opened a PR, filed an issue, started a Discussion, or simply tried an agent and told us what worked — thank you. You're the reason The Agency keeps getting better.
 

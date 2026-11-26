@@ -284,7 +284,7 @@ Level 2: the agents in that division, with the short frontmatter description.
 
 - `accounts-payable-agent` — Accounts Payable Agent — executes vendor payments, invoices and recurring bills with approval gates.
 - `agentic-identity-trust` — Agentic Identity & Trust — identity and verification systems for autonomous multi-agent environments.
-- `agents-orchestrator` — Agents Orchestrator — autonomous pipeline manager from spec to ship; delegates and enforces QA gates.
+- `agents-orchestrator` — Maestro — autonomous pipeline manager from spec to ship; delegates and enforces QA gates.
 - `automation-governance-architect` — Automation Governance Architect — audits automations for value, risk and maintainability before build.
 - `business-strategist` — Business Strategist — competitive analysis, market entry and growth strategy.
 - `career-ops` — Career Ops — score roles against the CV, tailor resume and letter, and track the search; the owner always presses submit.

@@ -2,6 +2,7 @@
 
 > Generated from git by `scripts/gen-changelog.sh` — do not edit by hand.
 
+- **v2.7.18** (2026-11-26) · `docs` — align v2 docs with catalog, Maestro role and tool list
 - **v2.7.17** (2026-11-25) · `fix` — rename quant-engine module path to github.com/rosaldo/NeoGoAgents
 - **v2.7.16** (2026-11-25) · `fix` — make Maestro a primary OpenCode agent
 - **v2.7.15** (2026-11-25) · `fix` — make OpenCode cap warning version-aware

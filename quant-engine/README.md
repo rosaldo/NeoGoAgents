@@ -227,7 +227,7 @@ A second kind of module is reserved next to `Strategy` (trading): an allocation 
 
 ## Versioning
 
-This module lives in a subdirectory of its repository, so its versions are tags of the form `quant-engine/vX.Y.Z`. Until a version is tagged, consume it with a local `replace` directive in your `go.mod`.
+This module lives in a subdirectory of its repository, so its versions are tags of the form `quant-engine/vX.Y.Z`; until one is tagged, consume it with a local `replace` directive in your `go.mod` or pin a pseudo-version, e.g. `github.com/rosaldo/NeoGoAgents/quant-engine v0.0.0-20261125230229-faf23b35bbe6`.
 
 ## Development
 

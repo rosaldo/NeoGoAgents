@@ -19,8 +19,9 @@
 
 OpenCode agents are `.md` files with YAML frontmatter stored in
 `.opencode/agents/`. The converter maps named colors to hex codes and adds
-`mode: subagent` so agents are invoked on-demand via `@agent-name` rather
-than cluttering the primary agent picker.
+`mode: subagent` to every agent except Maestro, whose source sets
+`opencode_mode: primary`; Maestro therefore appears in the primary agent
+picker, while the others are invoked on-demand via `@agent-name`.
 
 ## Install
 
@@ -44,7 +45,7 @@ In OpenCode, invoke a subagent with the `@` prefix:
 @reality-checker review this PR.
 ```
 
-You can also select agents from the OpenCode UI's agent picker.
+You can also select Maestro from the OpenCode UI's primary agent picker; the other agents stay on-demand via `@`.
 
 ## Agent Format
 
@@ -59,7 +60,10 @@ color: "#00FFFF"
 ---
 ```
 
+Maestro's generated file uses `name: maestro` with `mode: primary` instead of the `mode: subagent` shown above.
+
 - **mode: subagent** — agent is available on-demand, not shown in the primary Tab-cycle list
+- **mode: primary** — Maestro only (from `opencode_mode: primary` in `specialized/agents-orchestrator.md`), shown in the primary agent picker
 - **color** — hex code (named colors from source files are converted automatically)
 
 ## Project vs Global
